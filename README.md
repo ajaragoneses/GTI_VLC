@@ -1,5 +1,9 @@
 #Versión del VLC para el GTI
 
+[ ] Prueba 1
+[ x ] Prueba 2
+
+
 __Lista de ficheros modificados__
 * /modules/demux/adaptative/Streams.hpp
 * /modules/demux/adaptative/Streams.cpp
