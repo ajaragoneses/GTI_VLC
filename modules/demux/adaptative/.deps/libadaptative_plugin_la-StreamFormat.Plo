@@ -1,0 +1,7 @@
+demux/adaptative/libadaptative_plugin_la-StreamFormat.lo: \
+ demux/adaptative/StreamFormat.cpp /usr/include/stdc-predef.h \
+ demux/adaptative/StreamFormat.hpp
+
+/usr/include/stdc-predef.h:
+
+demux/adaptative/StreamFormat.hpp:

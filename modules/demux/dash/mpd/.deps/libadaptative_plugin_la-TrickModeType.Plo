@@ -1,0 +1,15 @@
+demux/dash/mpd/libadaptative_plugin_la-TrickModeType.lo: \
+ demux/dash/mpd/TrickModeType.cpp /usr/include/stdc-predef.h ../config.h \
+ ../include/vlc_fixups.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h \
+ demux/dash/mpd/TrickModeType.h
+
+/usr/include/stdc-predef.h:
+
+../config.h:
+
+../include/vlc_fixups.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h:
+
+demux/dash/mpd/TrickModeType.h:
