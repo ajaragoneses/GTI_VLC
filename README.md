@@ -2,7 +2,7 @@
 
 __Comandos basicos de GIT__
 
-```
+```sh
 $ git add * # Añade todos los ficheros creados
 $ git rm FICHER # Elimina el fichero dado (para renombrar ficheros)
 $ git commit -a -m "MENSAJE" # Hacer un commit
