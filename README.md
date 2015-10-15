@@ -1,7 +1,7 @@
 #Versión del VLC para el GTI
 
-[ ] Prueba 1
-[ x ] Prueba 2
+- [ ] Prueba 1
+- [x] Prueba 2
 
 
 __Lista de ficheros modificados__
