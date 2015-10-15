@@ -1,10 +1,5 @@
 #Versión del VLC para el GTI
 
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-
 
 __Lista de ficheros modificados__
 * /modules/demux/adaptative/Streams.hpp
