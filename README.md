@@ -80,3 +80,116 @@ ELSE
 	ENDIF
 ENDIF	
 ```
+
+
+###Algoritmo del buffer
+
+```
+Buffer<Segmentos> bufferCliente;
+Buffer<Segmentos> bufferPresentacion;
+int tiempoDescarga;
+int duracionSegmento; // en segundos
+int bitrateSiguienteSegmento; 
+int bitrateAnchoBanda;
+int segundosPorPresentar;
+bool congelacion = false;
+int duracionCongelacion;
+int contadorSegmentos = 0;
+int segundosDelayBuffer = ??? ;
+
+// Buffer cliente NO vacío
+if(bufferCliente.getTotalSecondsInBuffer() != 0){
+	// Calcular tiempo de descarga
+	tiempoDescarga = (duracionSegmento * bitrateSiguienteSegmento) / bitrateAnchoBanda;
+
+	/*******************/
+	// tiempoDescarga = (tamañoSegmento) / bitrateAnchoBanda
+	/*******************/
+
+	// Hay más segundos en el buffer de presentacion que lo que se tarda en descargar
+	if(bufferPresentacion.getTotalSecondsInBuffer() >= tiempoDescarga){
+		// "Empujamos" los segundos del buffer a presentar
+		bufferPresentacion.presentSeconds(tiempoDescarga);
+	} 
+	// NO hay más segundos en el buffer de presentacion que lo que se tarda en descargar
+	else {
+		// Calculamos cuanto queda por descargar y cuantos paquetes hay que extraer
+		segundosPorPresentar = tiempoDescarga - bufferPresentacion.getTotalSecondsInBuffer();
+		PaquetesAExtraer = ceil(segundosPorPresentar / duracionSegmento);
+		
+		// Hay que extraer más paquetes de los que existen
+		if(paquetesAExtraer > bufferCliente.size()){
+			// Fijamos que solo se extraiga lo que hay
+            paquetesAExtraer = bufferCliente.size();
+            // Se produce congelación y la duración de la misma
+            congelacion = true; 
+            duracionCongelacion = segundosPorPresentar - bufferCliente.getTotalSecondsInBuffer();
+		}
+		// Hay que extraer MENOS de lo que existen en el buffer 
+		else {
+			congelacion = false; 
+			duracionCongelacion = 0;
+			// Actualizamos el búfer de presentación: Número de segundos del último segmento que ha salido del búfer, que no se han presentado al usuario.           
+			// buffer_presentation = abs(aux_time - segm_decoded*Tseg);
+		}
+	}
+
+	// Si no hay congelación
+	if (!congelacion){	
+		// Descargar segmento y mandarlos al buffer de presentacion
+		bufferCliente.getSegmentFromServer();
+		bufferCliente.sendSegmentsTo(PaquetesAExtraer, bufferPresentacion);
+	} 
+	// Si hay congelación
+	else {
+		// Descargar UN segmento y mandarlo al buffer de prensentación
+		bufferCliente.getSegmentFromServer();
+		bufferCliente.sendSegmentsTo(1, bufferPresentacion);
+	}
+} 
+
+// Buffer cliente Vacío
+else {
+	tiempoDescarga = (duracionSegmento * bitrateSiguienteSegmento) / bitrateAnchoBanda;
+	PaquetesAExtraer = 0;
+ 
+ 	// Si es el primer segmento de la sesión No podemos considerar que ha habido congelación
+	if (contadorSegmentos == 1){
+        bufferPresentacion.empty();
+        congelacion = false;
+		duracionCongelacion = 0;
+        bufferCliente.getSegmentFromServer();
+	} 
+	// No es el primer segmento
+	else {
+		// Hay más segundos en el buffer de presentacion que el tiempo que se tarda en descargar un nuevo segmento
+        if(bufferPresentacion.getTotalSecondsInBuffer() >= tiempoDescarga){
+        	// Empujamos los segmentos para que se presenten
+            bufferPresentacion.presentSeconds(tiempoDescarga);
+            // No calculamos aux_time porque no vamos a sacar ningún segmento del búfer de cliente
+            // Cancelamos la congelación y obtenemos un nuevo segmento en el buffer del cliente
+	        congelacion = false;
+			duracionCongelacion = 0;
+	        bufferCliente.getSegmentFromServer();        
+        } 
+        // No hay más segundos en el buffer que el tiempo que se tarda en descargar un nuevo segmento
+        else {
+        	// Establecemos que hay congelación y calculamos su duración
+            congelacion = true;
+			duracionCongelacion = tiempoDescarga - bufferPresentacion.getTotalSecondsInBuffer();
+
+			// Vaciamos el buffer cliente y obtenemos un nuevo segmento, que mandamos al buffer de presentación
+            bufferCliente.empty();
+        	bufferCliente.getSegmentFromServer();
+			bufferCliente.sendSegmentsTo(1, bufferPresentacion);
+        }                    
+	} 
+}
+
+// Retraso de la obtención del siguiente segmento
+if ((segundosDelayBuffer != 0){
+	bufferPresentacion.empty();
+	PaquetesAExtraer = ((bufferCliente.getTotalSecondsInBuffer() - segundosDelayBuffer) / duracionSegmento) + 1; 
+	bufferCliente.extraerPaquetes(PaquetesAExtraer);
+}
+```
