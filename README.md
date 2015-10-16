@@ -4,15 +4,15 @@ __Lista de Hitos__
 
 _Algoritmo Buffer_
 
-- [x] Crear un hilo para descarga de segmentos.
-- [x] Crear buffer (de exclusión mutua) de cliente y otro de presentación.
-- [x] Obtener la escala de tiempos y la duración de cada segmento.
-- [ ] Calcular Duración de las congelaciones.
+-  ~~Crear un hilo para descarga de segmentos.~~
+-  ~~Crear buffer (de exclusión mutua) de cliente y otro de presentación.~~
+-  ~~Obtener la escala de tiempos y la duración de cada segmento.~~
+-  Calcular Duración de las congelaciones.
 
 _Algoritmo lógica_
 
-- [X] Crear una lógica "Escalera".
-- [ ] Implementar la lógica del algoritmo dado. 
+-  ~~Crear una lógica "Escalera".~~
+-  Implementar la lógica del algoritmo dado. 
 
 
 __Lista de ficheros modificados__
