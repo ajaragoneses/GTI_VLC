@@ -11,7 +11,7 @@ _Algoritmo Buffer_
 
 _Algoritmo lógica_
 
--  ~~Crear una lógica "Escalera".~~
+-  Crear una lógica "Escalera".
 -  Implementar la lógica del algoritmo dado. 
 
 
