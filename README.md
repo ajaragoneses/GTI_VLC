@@ -1,5 +1,17 @@
 #Versión del VLC para el GTI
 
+__Lista de Hitos__
+
+_Algoritmo Buffer_
+- [x] Crear un hilo para descarga de segmentos.
+- [x] Crear buffer (de exclusión mutua) de cliente y otro de presentación.
+- [x] Obtener la escala de tiempos y la duración de cada segmento.
+- [ ] Calcular Duración de las congelaciones.
+
+_Algoritmo lógica_
+- [X] Crear una lógica "Escalera".
+- [ ] Implementar la lógica del algoritmo dado. 
+
 
 __Lista de ficheros modificados__
 * /modules/demux/adaptative/Streams.hpp
@@ -8,6 +20,7 @@ __Lista de ficheros modificados__
 * /modules/demux/adaptative/SegmentTracker.cpp
 
 
+<!--
 __Comandos basicos de GIT__
 
 ```sh
@@ -16,6 +29,7 @@ $ git rm FICHERO # Elimina el fichero dado (para renombrar ficheros)
 $ git commit -a -m "MENSAJE" # Hacer un commit
 $ git git push # Subir los cambios al servidor
 ```
+-->
 
 ##Algoritmos
 
