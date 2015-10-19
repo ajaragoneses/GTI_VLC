@@ -92,32 +92,31 @@ BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptati
 	}	
     // DEBUG("%ix%i -> %i\n", ret[contador]->getWidth(), ret[contador]->getHeight(), ret[contador]->getBandwidth() );
 
-  //   RepresentationSelector selector;
-  //   if(sumaOresta == 0 && contador2 == 5 ){
-	 //    if(contador < ret.size() ){ 
-		// 	contador++;
-		// }
-		// if(contador == ret.size()-1){
-		// 	sumaOresta++;
-		// }	
-		// contador2 = 0;
-  //   }
+    RepresentationSelector selector;
+    if(sumaOresta == 0 && contador2 == 5 ){
+	    if(contador < ret.size() ){ 
+			contador++;
+		}
+		if(contador == ret.size()-1){
+			sumaOresta++;
+		}	
+		contador2 = 0;
+    }
 
- //    if(sumaOresta == 1 && contador2 == 5 ){
-	//     if(contador > 0 ){
-	//     	contador--;
-	//     }
-	//     if(contador == 0){
-	//     	sumaOresta--;
-	//     }
+    if(sumaOresta == 1 && contador2 == 5 ){
+	    if(contador > 0 ){
+	    	contador--;
+	    }
+	    if(contador == 0){
+	    	sumaOresta--;
+	    }
 
-	//     contador2 = 0;
-	// }
+	    contador2 = 0;
+	}
 
-	// contador2++;
+	contador2++;
 
- //    DEBUG("contador: %i\n", contador);
- //    return selector.select(period, type, ret[contador]->getBandwidth(), width, height);
-	return NULL;
+    // DEBUG("contador: %i\n", contador);
+    return selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
 }
 
