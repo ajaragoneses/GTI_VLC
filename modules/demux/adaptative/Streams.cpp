@@ -69,7 +69,7 @@ using namespace std;
 
 #define MAX_BUFFER 10
 
-// #define NO_BUFFER
+#define NO_BUFFER
 
 vlc_mutex_t  lock_conMannager;
 #ifndef NO_BUFFER
@@ -358,7 +358,7 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     /* New chunk, do query */
     if(chunk->getBytesRead() == 0)
     {
-        DEBUG("PATH: %s\n", chunk->getPath().c_str());
+        printf("PATH: %s\n", chunk->getPath().c_str());
         newSegment = true;
         DEBUG("timescale: %llu\n",segmentTracker->getTimeScale() );
 
@@ -391,9 +391,9 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     ssize_t ret = chunk->getConnection()->read(block->p_buffer, readsize);
     time = mdate() - time;
 
-    time_total += time;
 
     #ifndef NO_BUFFER
+        time_total += time;
         if (newSegment && ((float)time_total/1000000 > (float)buffer->getBufferTotalTime()/buffer->getTimeScale()) && (buffer->size() == 0) ){
             printf("time:%f buffer:%f\n", (float)time_total/1000000, (float)buffer->getBufferTotalTime()/buffer->getTimeScale() );
             printf("\033[1;31mFREEZE!!!\033[0m\n");

@@ -54,6 +54,7 @@ namespace adaptative
                     AlwaysBest,
                     AlwaysLowest,
                     RateBased,
+                    GTI_Stairs,
                     FixedRate
                 };
         };

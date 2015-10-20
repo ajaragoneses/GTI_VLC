@@ -34,12 +34,22 @@ using namespace adaptative::logic;
 using namespace adaptative::playlist;
 
 
-#define DBG_MSG
+#define __STDC_FORMAT_MACROS
+
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#ifndef __FUNCTION_NAME__
+    #ifdef WIN32   //WINDOWS
+        #define __FUNCTION_NAME__   __FUNCTION__  
+    #else          //*NIX
+        #define __FUNCTION_NAME__   __func__ 
+    #endif
+#endif
 
 
+
+// #define DBG_MSG
 #ifdef DBG_MSG
-    #define DEBUG(fmt, ...) printf("\033[1;34m[%s]\033[0m "fmt, __FILENAME__, __VA_ARGS__)
+    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  __VA_ARGS__)
 #else
     #define DEBUG(fmt, ...)
 #endif
@@ -61,10 +71,10 @@ BaseRepresentation *AlwaysBestAdaptationLogic::getCurrentRepresentation(BaseAdap
 
 /***************************************************************/
 
-
+#define MAX_CONTADOR 5
 
 int contador = 0;
-int contador2 = 0;
+int contador2 = 1;
 int sumaOresta = 0;
 int width = 0;
 int height = 0;
@@ -79,21 +89,23 @@ StairsAdaptationLogic::StairsAdaptationLogic    (int w, int h) :
 
 BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
+    if(adaptSet == NULL){
+    	return NULL;
+    }
 
     if(ret.size() == 0){
-		// std::vector<AdaptationSet *> adaptSets = period->getAdaptationSets(type);
         std::vector<BaseRepresentation *> reps = adaptSet->getRepresentations();
+		DEBUG("Reps Size: %i\n", reps.size());
 		for(uint i = 0; i < reps.size(); i++){
+			DEBUG("%ix%i --> %i\n", reps[i]->getWidth(), reps[i]->getHeight(), reps[i]->getBandwidth());
 			if(reps[i]->getWidth() == width && reps[i]->getHeight() == height){
 				ret.push_back(reps[i]);
 			}
 		}
-		// DEBUG("Size: %i\n", ret.size());
+		DEBUG("Size: %i\n", ret.size());
 	}	
-    // DEBUG("%ix%i -> %i\n", ret[contador]->getWidth(), ret[contador]->getHeight(), ret[contador]->getBandwidth() );
 
-    RepresentationSelector selector;
-    if(sumaOresta == 0 && contador2 == 5 ){
+    if(sumaOresta == 0 && contador2 == MAX_CONTADOR ){
 	    if(contador < ret.size() ){ 
 			contador++;
 		}
@@ -103,7 +115,7 @@ BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptati
 		contador2 = 0;
     }
 
-    if(sumaOresta == 1 && contador2 == 5 ){
+    if(sumaOresta == 1 && contador2 == MAX_CONTADOR ){
 	    if(contador > 0 ){
 	    	contador--;
 	    }
@@ -116,7 +128,20 @@ BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptati
 
 	contador2++;
 
-    // DEBUG("contador: %i\n", contador);
-    return selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
+    DEBUG("contador: %i\n", contador);
+    DEBUG("%ix%i -> %i\n", ret[contador]->getWidth(), ret[contador]->getHeight(), ret[contador]->getBandwidth() );
+    
+    RepresentationSelector selector;
+    // return selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
+
+
+    BaseRepresentation *rep = selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
+    if ( rep == NULL )
+    {
+        rep = selector.select(adaptSet);
+        if ( rep == NULL )
+            return NULL;
+    }
+    return rep;
 }
 

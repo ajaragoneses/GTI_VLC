@@ -29,7 +29,7 @@ using namespace adaptative::logic;
 using namespace adaptative::playlist;
 
 
-// #define DBG_MSG
+#define DBG_MSG
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 #ifndef __FUNCTION_NAME__
     #ifdef WIN32   //WINDOWS
@@ -94,9 +94,9 @@ SegmentChunk * SegmentTracker::getNextChunk(bool switch_allowed)
     if(rep != prevRepresentation)
     {
         prevRepresentation = rep;
-        initializing = true;
+        // initializing = true;
     }
-    DEBUG("%s\n", "Entrando en getNextChunk");
+    // DEBUG("%s\n", "Entrando en getNextChunk");
 
     if(initializing)
     {

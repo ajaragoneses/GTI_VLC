@@ -68,11 +68,13 @@ static void Close   (vlc_object_t *);
 #define ADAPT_LOGIC_TEXT N_("Adaptation Logic")
 
 static const int pi_logics[] = {AbstractAdaptationLogic::RateBased,
+                                AbstractAdaptationLogic::GTI_Stairs,
                                 AbstractAdaptationLogic::FixedRate,
                                 AbstractAdaptationLogic::AlwaysLowest,
                                 AbstractAdaptationLogic::AlwaysBest};
 
 static const char *const ppsz_logics[] = { N_("Bandwidth Adaptive"),
+                                           N_("GTI_Stairs"),
                                            N_("Fixed Bandwidth"),
                                            N_("Lowest Bandwidth/Quality"),
                                            N_("Highest Bandwith/Quality")};

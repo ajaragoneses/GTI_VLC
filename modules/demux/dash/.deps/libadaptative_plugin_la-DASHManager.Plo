@@ -137,6 +137,7 @@ demux/dash/libadaptative_plugin_la-DASHManager.lo: \
  demux/dash/xml/../mpd/Profile.hpp \
  demux/dash/../adaptative/logic/RateBasedAdaptationLogic.h \
  demux/dash/../adaptative/logic/AbstractAdaptationLogic.h \
+ demux/dash/../adaptative/logic/AlwaysBestAdaptationLogic.h \
  demux/dash/../adaptative/tools/Helper.h ../include/vlc_demux.h \
  ../include/vlc_es_out.h ../include/vlc_meta.h \
  demux/dash/../adaptative/tools/Retrieve.hpp \
@@ -572,6 +573,8 @@ demux/dash/xml/../mpd/Profile.hpp:
 demux/dash/../adaptative/logic/RateBasedAdaptationLogic.h:
 
 demux/dash/../adaptative/logic/AbstractAdaptationLogic.h:
+
+demux/dash/../adaptative/logic/AlwaysBestAdaptationLogic.h:
 
 demux/dash/../adaptative/tools/Helper.h:
 

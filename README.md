@@ -11,15 +11,20 @@ _Algoritmo Buffer_
 
 _Algoritmo lógica_
 
--  Crear una lógica "Escalera".
+-  ~~Crear una lógica "Escalera".~~
 -  Implementar la lógica del algoritmo dado. 
 
+_Miscelánea_
+
+- ~~Corregir el error por el que la reproducción se detiene en algún punto del final de la misma.~~
 
 __Lista de ficheros modificados__
 * /modules/demux/adaptative/Streams.hpp
 * /modules/demux/adaptative/Streams.cpp
 * /modules/demux/adaptative/SegmentTracker.hpp
 * /modules/demux/adaptative/SegmentTracker.cpp
+* /modules/demux/adaptative/logic/AlwaysBestAdaptationLogic.h
+* /modules/demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp
 
 
 <!--

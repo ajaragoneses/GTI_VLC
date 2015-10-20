@@ -34,6 +34,7 @@
 #include "mpd/ProgramInformation.h"
 #include "xml/DOMParser.h"
 #include "../adaptative/logic/RateBasedAdaptationLogic.h"
+#include "../adaptative/logic/AlwaysBestAdaptationLogic.h"
 #include "../adaptative/tools/Helper.h"
 #include <vlc_stream.h>
 #include <vlc_demux.h>
@@ -229,6 +230,12 @@ AbstractAdaptationLogic *DASHManager::createLogic(AbstractAdaptationLogic::Logic
             int width = var_InheritInteger(p_demux, "adaptative-width");
             int height = var_InheritInteger(p_demux, "adaptative-height");
             return new (std::nothrow) RateBasedAdaptationLogic(width, height);
+        }
+        case AbstractAdaptationLogic::GTI_Stairs:
+        {
+            int width = var_InheritInteger(p_demux, "adaptative-width");
+            int height = var_InheritInteger(p_demux, "adaptative-height");
+            return new (std::nothrow) StairsAdaptationLogic(width, height);
         }
         default:
             return PlaylistManager::createLogic(type);
