@@ -7,7 +7,7 @@ _Algoritmo Buffer_
 -  ~~Crear un hilo para descarga de segmentos.~~
 -  ~~Crear buffer (de exclusión mutua) de cliente y otro de presentación.~~
 -  ~~Obtener la escala de tiempos y la duración de cada segmento.~~
--  Calcular Duración de las congelaciones.
+-  ~~Calcular Duración de las congelaciones.~~
 
 _Algoritmo lógica_
 
