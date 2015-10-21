@@ -28,7 +28,7 @@
 #include <vlc_demux.h>
 #include <vector>
 #include <inttypes.h>
-
+#include <math.h>       /* ceil */
 
 using namespace adaptative;
 using namespace adaptative::http;
@@ -69,7 +69,7 @@ using namespace std;
 
 #define MAX_BUFFER 10
 
-#define NO_BUFFER
+// #define NO_BUFFER
 
 vlc_mutex_t  lock_conMannager;
 #ifndef NO_BUFFER
@@ -393,11 +393,39 @@ size_t Stream::read(HTTPConnectionManager *connManager)
 
 
     #ifndef NO_BUFFER
+
+        bool congelacion;
+        int duracionCongelacion;
+        int paquetesAExtraer;
+
         time_total += time;
-        if (newSegment && ((float)time_total/1000000 > (float)buffer->getBufferTotalTime()/buffer->getTimeScale()) && (buffer->size() == 0) ){
-            printf("time:%f buffer:%f\n", (float)time_total/1000000, (float)buffer->getBufferTotalTime()/buffer->getTimeScale() );
-            printf("\033[1;31mFREEZE!!!\033[0m\n");
+        if (newSegment && ((float)time_total/1000000 > (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale()) && (buffer->size() == 0) ){
+            int segundosPorPresentar = time_total - buffer->getTimeScale();
+            float paquetesAExtraer = ceil(float(segundosPorPresentar)/chunk->getSegmentDuration());
+            printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
+            
+
+
+            printf("time:%f buffer:%f\n", (float)time_total/1000000, (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale() );
             time_total = 0;
+
+            if(paquetesAExtraer  > buffer->bufferInSize() ){
+                // Fijamos que solo se extraiga lo que hay
+                paquetesAExtraer = buffer->bufferInSize(); /*bufferCliente.size();*/
+                // Se produce congelación y la duración de la misma
+                congelacion = true; 
+                duracionCongelacion = segundosPorPresentar - buffer->getBufferTotalTimeOut();
+                printf("Duracion congelacion: %i\n", duracionCongelacion);
+            } else {
+                congelacion = false; 
+                duracionCongelacion = 0;
+                // Actualizamos el búfer de presentación: Número de segundos del último segmento que ha salido del búfer, que no se han 
+                // presentado al usuario.
+                // buffer_presentation = abs(aux_time - segm_decoded*Tseg);
+            }
+            if(congelacion){
+                printf("\033[1;31mFREEZE!!!\033[0m\n");
+            }
         }
     #endif
 
@@ -488,7 +516,8 @@ buffer_threadSave::buffer_threadSave(){
     vlc_mutex_init( &lock );
     vlc_cond_init( &no_lleno );
     vlc_cond_init( &no_vacio );
-    bufferTotalTime = 0;
+    bufferTotalTimeIn = 0;
+    bufferTotalTimeOut = 0;
     timescale = 0;
 }
 
@@ -505,14 +534,17 @@ void buffer_threadSave::push(data_download* data){
     PRINT_BUFFER("IN", buffer_interno_in);
     PRINT_BUFFER("OUT", buffer_interno_out);
     
+    bufferTotalTimeIn += data->duration;
+    
     if(inToOut()){
         buffer_interno_out.push_back(buffer_interno_in.front());
         DEBUG("%s\n","extraemos...");
+        bufferTotalTimeOut += data->duration;
+        bufferTotalTimeIn -= data->duration;
         buffer_interno_in.pop_front();
         DEBUG("%s\n","Desechamos...");
     }
     
-    bufferTotalTime += data->duration;
     DEBUG("PUSH: %li, TOTAL: %li\n", data->duration, bufferTotalTime);
 
     PRINT_BUFFER("IN", buffer_interno_in);
@@ -528,6 +560,16 @@ int buffer_threadSave::size(){
     DEBUG("%s\n","lock!");
     vlc_mutex_lock( &lock );
     ret = buffer_interno_out.size();
+    vlc_mutex_unlock( &lock );
+    DEBUG("%s\n","unlock!");
+    return ret;
+}
+
+int buffer_threadSave::bufferInSize(){
+    int ret;
+    DEBUG("%s\n","lock!");
+    vlc_mutex_lock( &lock );
+    ret = buffer_interno_in.size();
     vlc_mutex_unlock( &lock );
     DEBUG("%s\n","unlock!");
     return ret;
@@ -556,7 +598,7 @@ buffer_threadSave::data_download* buffer_threadSave::pop(){
     DEBUG("%s\n","pop data...");
     buffer_threadSave::data_download* ret = buffer_interno_out.front();
     buffer_interno_out.pop_front();
-    bufferTotalTime -= ret->duration;
+    bufferTotalTimeOut -= ret->duration;
     vlc_mutex_unlock( &lock );
     vlc_cond_signal(&no_lleno);
     DEBUG("%s\n","unlock!");
@@ -572,8 +614,12 @@ void buffer_threadSave::empty(){
     DEBUG("%s\n","unlock!");
 }
 
-int64_t buffer_threadSave::getBufferTotalTime(){
-    return bufferTotalTime;
+int64_t buffer_threadSave::getBufferTotalTimeIn(){
+    return bufferTotalTimeIn;
+}
+
+int64_t buffer_threadSave::getBufferTotalTimeOut(){
+    return bufferTotalTimeOut;
 }
 
 int64_t buffer_threadSave::getTimeScale(){
@@ -584,6 +630,10 @@ void buffer_threadSave::setTimeScale(int64_t timescale_l){
     vlc_mutex_lock( &lock );
     timescale = timescale_l;
     vlc_mutex_unlock( &lock );
+}
+
+int64_t buffer_threadSave::getFreezingTime(){
+    return 0;
 }
 
 /*******************************************/

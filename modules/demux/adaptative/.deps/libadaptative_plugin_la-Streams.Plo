@@ -123,7 +123,16 @@ demux/adaptative/libadaptative_plugin_la-Streams.lo: \
  demux/adaptative/playlist/../http/Chunk.h \
  demux/adaptative/playlist/../StreamFormat.hpp \
  demux/adaptative/SegmentTracker.hpp ../include/vlc_stream.h \
- ../include/vlc_block.h ../include/vlc_demux.h ../include/vlc_es_out.h
+ ../include/vlc_block.h ../include/vlc_demux.h ../include/vlc_es_out.h \
+ /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/huge_val.h \
+ /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
+ /usr/include/x86_64-linux-gnu/bits/huge_vall.h \
+ /usr/include/x86_64-linux-gnu/bits/inf.h \
+ /usr/include/x86_64-linux-gnu/bits/nan.h \
+ /usr/include/x86_64-linux-gnu/bits/mathdef.h \
+ /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+ /usr/include/x86_64-linux-gnu/bits/mathinline.h \
+ /usr/include/x86_64-linux-gnu/bits/math-finite.h
 
 /usr/include/stdc-predef.h:
 
@@ -460,3 +469,23 @@ demux/adaptative/SegmentTracker.hpp:
 ../include/vlc_demux.h:
 
 ../include/vlc_es_out.h:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_val.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_valf.h:
+
+/usr/include/x86_64-linux-gnu/bits/huge_vall.h:
+
+/usr/include/x86_64-linux-gnu/bits/inf.h:
+
+/usr/include/x86_64-linux-gnu/bits/nan.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathdef.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathinline.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-finite.h:

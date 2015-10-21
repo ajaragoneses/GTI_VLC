@@ -216,9 +216,12 @@ namespace adaptative
             int size();
             data_download* pop();
             void empty();
-            int64_t getBufferTotalTime();
+            int64_t getBufferTotalTimeIn();
+            int64_t getBufferTotalTimeOut();
             int64_t getTimeScale();
             void setTimeScale(int64_t timescale_l);
+            int64_t getFreezingTime();
+            int bufferInSize();
 
         private:
             vlc_mutex_t  lock;
@@ -229,7 +232,8 @@ namespace adaptative
             list<data_download *> buffer_interno_in;
             list<data_download *> buffer_interno_out;
             bool inToOut();
-            int64_t bufferTotalTime;
+            int64_t bufferTotalTimeIn;
+            int64_t bufferTotalTimeOut;
             int64_t timescale;
             int64_t durationSegment;
 
