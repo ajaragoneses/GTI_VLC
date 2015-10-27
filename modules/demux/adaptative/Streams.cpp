@@ -50,7 +50,7 @@ using namespace std;
 
 // #define DBG_MSG
 #ifdef DBG_MSG
-    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  __VA_ARGS__)
+    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  ##__VA_ARGS__)
 #else
     #define DEBUG(fmt, ...)
 #endif
@@ -67,7 +67,7 @@ using namespace std;
     #define PRINT_BUFFER(buff_name, buff)
 #endif    
 
-#define MAX_BUFFER 10
+#define MAX_BUFFER 100
 
 // #define NO_BUFFER
 
@@ -92,7 +92,9 @@ void *Stream::EventThread(void *data){
 }
 
 void *Stream::thread_buffer(){
-    while(!thread_end){    
+    printf("thread_end: %i\n", thread_end);
+    // while(!thread_end){
+    while(!eof){
         vlc_mutex_lock(&lock_conMannager);
         while (connManagerGlobal == NULL){ /* No hay connManagerGlobal */
             DEBUG("%s\n", "bloqueo por ausencia de connManager.");
@@ -102,7 +104,7 @@ void *Stream::thread_buffer(){
         vlc_mutex_unlock(&lock_conMannager);
         read(connManagerGlobal); 
     }
-    DEBUG("%s\n", "Fin del hilo");
+    printf("%s\n", "Fin del hilo");
     return NULL;
 }
 
@@ -138,6 +140,7 @@ Stream::~Stream()
     delete segmentTracker;
 
     #ifndef NO_BUFFER
+        DEBUG("eliminamos el buffer\n");
         buffer->empty();
         delete buffer;
         thread_end = true;
@@ -167,6 +170,9 @@ void Stream::create(AbstractAdaptationLogic *logic, SegmentTracker *tracker,
     segmentTracker = tracker;
     streamOutputFactory = factory;
     updateFormat(format);
+    #ifndef NO_BUFFER
+        buffer->setAdaptationLogic(logic);
+    #endif
 }
 
 void Stream::updateFormat(StreamFormat &newformat)
@@ -236,7 +242,8 @@ SegmentChunk * Stream::getChunk()
         currentChunk = segmentTracker->getNextChunk(output->switchAllowed());
         if (currentChunk == NULL){
             eof = true;
-            DEBUG("%s\n","eof!");
+            // thread_end = true;
+            printf("%s\n","eof!");
         }
     }
     return currentChunk;
@@ -275,6 +282,7 @@ Stream::status Stream::demux(HTTPConnectionManager *connManager, mtime_t nz_dead
 {
     
     if(!output){
+        printf("%s\n","EOF");
         return Stream::status_eof;
     }
 
@@ -285,7 +293,7 @@ Stream::status Stream::demux(HTTPConnectionManager *connManager, mtime_t nz_dead
         if(read_real_ret <= 0)
         {
             if(output->isEmpty()){
-                DEBUG("%s\n","EOF");
+                printf("%s\n","EOF");
                 return Stream::status_eof;
             }
         }
@@ -314,21 +322,26 @@ size_t Stream::read_real(HTTPConnectionManager *connManager){
             vlc_cond_signal(&no_connManager);
             vlc_mutex_unlock( &lock_conMannager );
         }
-        buffer_threadSave::data_download* dataInfo = buffer->pop();
+        if(eof && buffer->bufferInSize() == 0 && buffer->size() == 0){
+            printf("Return 0!!\n");
+            readsize = 0;
+        } else {
+            buffer_threadSave::data_download* dataInfo = buffer->pop();
 
-        block_t * block = dataInfo->buffer;
-        DEBUG("%p\n",block);
-        readsize = dataInfo->buffer->i_buffer;
-        
-        DEBUG("readsize: %i\n", readsize);
-        DEBUG("elementos en el buffer (tras borrar): %i\n", buffer->size() );
+            block_t * block = dataInfo->buffer;
+            DEBUG("%p\n",block);
+            readsize = dataInfo->buffer->i_buffer;
+            
+            DEBUG("readsize: %i\n", readsize);
+            DEBUG("elementos en el buffer (tras borrar): %i\n", buffer->size() );
 
-        if(output){
-            output->pushBlock(block, dataInfo->b_segment_head_chunk);
-        } else{
-            DEBUG("%s\n", "Liberando bloque...");
-            block_Release(block);
-            DEBUG("%s\n", "Bloque liberado!");
+            if(output){
+                output->pushBlock(block, dataInfo->b_segment_head_chunk);
+            } else{
+                DEBUG("%s\n", "Liberando bloque...");
+                block_Release(block);
+                DEBUG("%s\n", "Bloque liberado!");
+            }
         }
         return readsize;
     #else
@@ -358,13 +371,11 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     /* New chunk, do query */
     if(chunk->getBytesRead() == 0)
     {
-        printf("PATH: %s\n", chunk->getPath().c_str());
         newSegment = true;
-        DEBUG("timescale: %llu\n",segmentTracker->getTimeScale() );
 
         #ifndef NO_BUFFER
             buffer->setTimeScale(segmentTracker->getTimeScale());
-            DEBUG("buffer duration: %li\n", buffer->getBufferTotalTime());
+            DEBUG("buffer duration: %li\n", buffer->getBufferTotalTimeIn());
         #endif
 
         int ret = chunk->getConnection()->query(chunk->getPath());
@@ -383,6 +394,8 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     if (readsize > 32768)
         readsize = 32768;
 
+    // printf("Readsize: %i\n", readsize);
+
     block_t *block = block_Alloc(readsize);
     if(!block)
         return 0;
@@ -399,33 +412,44 @@ size_t Stream::read(HTTPConnectionManager *connManager)
         int paquetesAExtraer;
 
         time_total += time;
-        if (newSegment && ((float)time_total/1000000 > (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale()) && (buffer->size() == 0) ){
-            int segundosPorPresentar = time_total - buffer->getTimeScale();
+        // if (newSegment && ((float)time_total/1000000 > (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale()) && (buffer->size() == 0) ){
+        if (newSegment){
+            int segundosPorPresentar = time_total - buffer->getBufferTotalTimeOut();
             float paquetesAExtraer = ceil(float(segundosPorPresentar)/chunk->getSegmentDuration());
-            printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
-            
 
 
-            printf("time:%f buffer:%f\n", (float)time_total/1000000, (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale() );
-            time_total = 0;
-
-            if(paquetesAExtraer  > buffer->bufferInSize() ){
-                // Fijamos que solo se extraiga lo que hay
-                paquetesAExtraer = buffer->bufferInSize(); /*bufferCliente.size();*/
-                // Se produce congelación y la duración de la misma
-                congelacion = true; 
-                duracionCongelacion = segundosPorPresentar - buffer->getBufferTotalTimeOut();
-                printf("Duracion congelacion: %i\n", duracionCongelacion);
-            } else {
-                congelacion = false; 
-                duracionCongelacion = 0;
-                // Actualizamos el búfer de presentación: Número de segundos del último segmento que ha salido del búfer, que no se han 
-                // presentado al usuario.
-                // buffer_presentation = abs(aux_time - segm_decoded*Tseg);
+            if((buffer->size() == 0) ){
+                time_total = 0;
+                if(paquetesAExtraer  > buffer->bufferInSize() ){
+                    // Fijamos que solo se extraiga lo que hay
+                    paquetesAExtraer = buffer->bufferInSize(); /*bufferCliente.size();*/
+                    // Se produce congelación y la duración de la misma
+                    congelacion = true; 
+                    duracionCongelacion = segundosPorPresentar - buffer->getBufferTotalTimeOut();
+                } else {
+                    congelacion = false; 
+                    duracionCongelacion = 0;
+                    // Actualizamos el búfer de presentación: Número de segundos del último segmento que ha salido del búfer, que no se han 
+                    // presentado al usuario.
+                    // buffer_presentation = abs(aux_time - segm_decoded*Tseg);
+                }
+                if(congelacion){
+                    printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                    printf("PATH: %s\n", chunk->getPath().c_str());
+                    printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
+                    printf("time_total: %li\n", time_total);
+                    printf("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn(), (float)buffer->getBufferTotalTimeIn());
+                    printf("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut(), (float)buffer->getBufferTotalTimeOut());
+                    printf("Scale: %li\n", buffer->getTimeScale());
+                    printf("buffer_in: %f (%f)\n", (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale())*1000000 );
+                    printf("buffer_out: %f (%f)\n", (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale())*1000000);
+                    printf("time: %f\n", (float)time_total/1000000 );
+                    printf("\033[1;31mFREEZE!!!\033[0m\n");
+                    printf("Duracion congelacion: %i\n", duracionCongelacion);
+                    printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                }
             }
-            if(congelacion){
-                printf("\033[1;31mFREEZE!!!\033[0m\n");
-            }
+
         }
     #endif
 
@@ -519,10 +543,15 @@ buffer_threadSave::buffer_threadSave(){
     bufferTotalTimeIn = 0;
     bufferTotalTimeOut = 0;
     timescale = 0;
+    // adaptationLogic = NULL;
+}
+
+void buffer_threadSave::setAdaptationLogic(AbstractAdaptationLogic* logic){
+    adaptationLogic = logic;
 }
 
 void buffer_threadSave::push(data_download* data){
-    DEBUG("%s\n","lock!");
+    DEBUG("lock!\n");
     vlc_mutex_lock( &lock );
     while (buffer_interno_out.size() == MAX_BUFFER){ /* si buffer lleno */
         DEBUG("%s%i\n", "bloqueo por buffer lleno: ",buffer_interno_in.size() );
@@ -537,15 +566,19 @@ void buffer_threadSave::push(data_download* data){
     bufferTotalTimeIn += data->duration;
     
     if(inToOut()){
+        DEBUG("inToOut true!\n");
         buffer_interno_out.push_back(buffer_interno_in.front());
         DEBUG("%s\n","extraemos...");
         bufferTotalTimeOut += data->duration;
         bufferTotalTimeIn -= data->duration;
+        DEBUG("bufferTotalTimeIn: %li\n");
         buffer_interno_in.pop_front();
         DEBUG("%s\n","Desechamos...");
+    } else {
+        DEBUG("\033[1;33minToOut false!\033[0m\n");
     }
     
-    DEBUG("PUSH: %li, TOTAL: %li\n", data->duration, bufferTotalTime);
+    DEBUG("PUSH: %li, TOTAL: %li\n", data->duration, bufferTotalTimeIn);
 
     PRINT_BUFFER("IN", buffer_interno_in);
     PRINT_BUFFER("OUT", buffer_interno_out);
@@ -580,10 +613,22 @@ bool buffer_threadSave::inToOut(){
         Check conditions to move data
         from buffer_in to buffer_out
     */
-    return true;
+    // printf("%i > %i?  %s\n",buffer_interno_in.size(),  (MAX_BUFFER/2), buffer_interno_in.size() > (MAX_BUFFER/2)? "true" : "false" );
+    // return buffer_interno_in.size() > (MAX_BUFFER/2);
+    // if(buffer_interno_out.size() < (MAX_BUFFER/2) || buffer_interno_in.size() > (MAX_BUFFER/2)){
+    //     return true;
+    // }
+
+    if(adaptationLogic == NULL){
+        printf("NULL!!!\n");
+        return true;
+    }
+    // return true;
+    return adaptationLogic->bufferTransferLogic();
 }
 
 buffer_threadSave::data_download* buffer_threadSave::pop(){
+    DEBUG("POP\n");
     DEBUG("%s\n","lock!");
     vlc_mutex_lock( &lock );
     while (buffer_interno_out.size() == 0){
@@ -599,6 +644,7 @@ buffer_threadSave::data_download* buffer_threadSave::pop(){
     buffer_threadSave::data_download* ret = buffer_interno_out.front();
     buffer_interno_out.pop_front();
     bufferTotalTimeOut -= ret->duration;
+    DEBUG("bufferTotalTimeOut: %li\n", bufferTotalTimeOut);
     vlc_mutex_unlock( &lock );
     vlc_cond_signal(&no_lleno);
     DEBUG("%s\n","unlock!");
@@ -615,11 +661,21 @@ void buffer_threadSave::empty(){
 }
 
 int64_t buffer_threadSave::getBufferTotalTimeIn(){
-    return bufferTotalTimeIn;
+    DEBUG("%s\n","lock!");
+    vlc_mutex_lock( &lock );
+    int64_t ret = bufferTotalTimeIn;
+    vlc_mutex_unlock( &lock );
+    DEBUG("%s\n","unlock!");
+    return ret;
 }
 
 int64_t buffer_threadSave::getBufferTotalTimeOut(){
-    return bufferTotalTimeOut;
+    DEBUG("%s\n","lock!");
+    vlc_mutex_lock( &lock );
+    int64_t ret = bufferTotalTimeOut;
+    vlc_mutex_unlock( &lock );
+    DEBUG("%s\n","unlock!");
+    return ret;
 }
 
 int64_t buffer_threadSave::getTimeScale(){

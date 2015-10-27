@@ -222,6 +222,7 @@ namespace adaptative
             void setTimeScale(int64_t timescale_l);
             int64_t getFreezingTime();
             int bufferInSize();
+            void setAdaptationLogic(AbstractAdaptationLogic* logic);
 
         private:
             vlc_mutex_t  lock;
@@ -236,6 +237,7 @@ namespace adaptative
             int64_t bufferTotalTimeOut;
             int64_t timescale;
             int64_t durationSegment;
+            AbstractAdaptationLogic* adaptationLogic;
 
     };
 

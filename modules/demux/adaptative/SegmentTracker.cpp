@@ -42,7 +42,7 @@ using namespace adaptative::playlist;
 
 
 #ifdef DBG_MSG
-    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  __VA_ARGS__)
+    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  ##__VA_ARGS__)
 #else
     #define DEBUG(fmt, ...)
 #endif
@@ -120,6 +120,7 @@ SegmentChunk * SegmentTracker::getNextChunk(bool switch_allowed)
     segment = rep->getSegment(BaseRepresentation::INFOTYPE_MEDIA, count);
     if(!segment)
     {
+        printf("RESET!\n");
         resetCounter();
         return NULL;
     }

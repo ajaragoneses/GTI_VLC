@@ -49,7 +49,7 @@ using namespace adaptative::playlist;
 
 // #define DBG_MSG
 #ifdef DBG_MSG
-    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  __VA_ARGS__)
+    #define DEBUG(fmt, ...) printf("\033[1;34m[%s@%i::%s()]\033[0m " fmt, __FILENAME__,__LINE__, __FUNCTION_NAME__,  ##__VA_ARGS__)
 #else
     #define DEBUG(fmt, ...)
 #endif

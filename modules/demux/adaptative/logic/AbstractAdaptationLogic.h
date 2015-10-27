@@ -47,6 +47,7 @@ namespace adaptative
 
                 virtual BaseRepresentation* getCurrentRepresentation(BaseAdaptationSet *) const = 0;
                 virtual void                updateDownloadRate     (size_t, mtime_t);
+                bool bufferTransferLogic();
 
                 enum LogicType
                 {
