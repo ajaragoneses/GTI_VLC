@@ -623,7 +623,6 @@ bool buffer_threadSave::inToOut(){
         printf("NULL!!!\n");
         return true;
     }
-    // return true;
     return adaptationLogic->bufferTransferLogic();
 }
 
