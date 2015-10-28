@@ -1,0 +1,4 @@
+demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo: \
+ demux/adaptative/logic/GTIAdaptationLogic.cpp /usr/include/stdc-predef.h
+
+/usr/include/stdc-predef.h:
