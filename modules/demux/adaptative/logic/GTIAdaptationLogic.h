@@ -39,6 +39,14 @@ namespace adaptative
 
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;  
         };
+
+        class GTIAdaptationLogic : public AbstractAdaptationLogic
+        {
+            public:
+                GTIAdaptationLogic           (int w, int h);
+
+                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;  
+        };
     }
 }
 

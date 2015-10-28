@@ -237,6 +237,12 @@ AbstractAdaptationLogic *DASHManager::createLogic(AbstractAdaptationLogic::Logic
             int height = var_InheritInteger(p_demux, "adaptative-height");
             return new (std::nothrow) StairsAdaptationLogic(width, height);
         }
+        case AbstractAdaptationLogic::GTI_Logic:
+        {
+            int width = var_InheritInteger(p_demux, "adaptative-width");
+            int height = var_InheritInteger(p_demux, "adaptative-height");
+            return new (std::nothrow) GTIAdaptationLogic(width, height);
+        }
         default:
             return PlaylistManager::createLogic(type);
     }

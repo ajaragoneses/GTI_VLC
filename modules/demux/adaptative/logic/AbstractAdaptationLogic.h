@@ -58,6 +58,7 @@ namespace adaptative
                     AlwaysLowest,
                     RateBased,
                     GTI_Stairs,
+                    GTI_Logic,
                     FixedRate
                 };
             protected:

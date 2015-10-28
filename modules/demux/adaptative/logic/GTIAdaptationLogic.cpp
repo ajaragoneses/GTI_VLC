@@ -122,7 +122,6 @@ BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptati
     RepresentationSelector selector;
     // return selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
 
-
     BaseRepresentation *rep = selector.select(adaptSet, ret[contador]->getBandwidth(), width, height);
     if ( rep == NULL )
     {
@@ -131,4 +130,19 @@ BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptati
             return NULL;
     }
     return rep;
+}
+
+
+/*************************************************************/
+
+GTIAdaptationLogic::GTIAdaptationLogic    (int w, int h) :
+                           AbstractAdaptationLogic      ()
+{
+    width  = w;
+    height = h;
+}
+
+BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
+{
+    return NULL;
 }
