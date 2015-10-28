@@ -34,7 +34,7 @@
 #include "mpd/ProgramInformation.h"
 #include "xml/DOMParser.h"
 #include "../adaptative/logic/RateBasedAdaptationLogic.h"
-#include "../adaptative/logic/AlwaysBestAdaptationLogic.h"
+#include "../adaptative/logic/GTIAdaptationLogic.h"
 #include "../adaptative/tools/Helper.h"
 #include <vlc_stream.h>
 #include <vlc_demux.h>

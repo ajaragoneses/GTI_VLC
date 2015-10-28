@@ -38,14 +38,6 @@ namespace adaptative
 
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;
         };
-
-        class StairsAdaptationLogic : public AbstractAdaptationLogic
-        {
-            public:
-                StairsAdaptationLogic           (int w, int h);
-
-                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;  
-        };
     }
 }
 
