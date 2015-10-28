@@ -143,7 +143,11 @@ demux/adaptative/libadaptative_plugin_la-SegmentTracker.lo: \
  demux/adaptative/playlist/BaseAdaptationSet.h \
  demux/adaptative/playlist/Segment.h \
  demux/adaptative/logic/AbstractAdaptationLogic.h \
- demux/adaptative/logic/IDownloadRateObserver.h
+ demux/adaptative/logic/IDownloadRateObserver.h \
+ demux/adaptative/logic/../Streams.hpp ../include/vlc_es.h \
+ ../include/vlc_fourcc.h ../include/vlc_text_style.h \
+ demux/adaptative/logic/../StreamsType.hpp \
+ demux/adaptative/logic/../StreamFormat.hpp
 
 /usr/include/stdc-predef.h:
 
@@ -522,3 +526,15 @@ demux/adaptative/playlist/Segment.h:
 demux/adaptative/logic/AbstractAdaptationLogic.h:
 
 demux/adaptative/logic/IDownloadRateObserver.h:
+
+demux/adaptative/logic/../Streams.hpp:
+
+../include/vlc_es.h:
+
+../include/vlc_fourcc.h:
+
+../include/vlc_text_style.h:
+
+demux/adaptative/logic/../StreamsType.hpp:
+
+demux/adaptative/logic/../StreamFormat.hpp:

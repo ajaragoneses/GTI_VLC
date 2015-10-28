@@ -676,6 +676,7 @@ am_libadaptative_plugin_la_OBJECTS = demux/adaptative/playlist/libadaptative_plu
 	demux/adaptative/playlist/libadaptative_plugin_la-Url.lo \
 	demux/adaptative/logic/libadaptative_plugin_la-AbstractAdaptationLogic.lo \
 	demux/adaptative/logic/libadaptative_plugin_la-AlwaysBestAdaptationLogic.lo \
+	demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo \
 	demux/adaptative/logic/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.lo \
 	demux/adaptative/logic/libadaptative_plugin_la-RateBasedAdaptationLogic.lo \
 	demux/adaptative/logic/libadaptative_plugin_la-Representationselectors.lo \
@@ -6792,6 +6793,8 @@ libadaptative_plugin_la_SOURCES =  \
 	demux/adaptative/logic/AbstractAdaptationLogic.h \
 	demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp \
 	demux/adaptative/logic/AlwaysBestAdaptationLogic.h \
+	demux/adaptative/logic/GTIAdaptationLogic.cpp \
+	demux/adaptative/logic/GTIAdaptationLogic.h \
 	demux/adaptative/logic/AlwaysLowestAdaptationLogic.cpp \
 	demux/adaptative/logic/AlwaysLowestAdaptationLogic.hpp \
 	demux/adaptative/logic/IDownloadRateObserver.h \
@@ -9075,6 +9078,9 @@ demux/adaptative/logic/libadaptative_plugin_la-AbstractAdaptationLogic.lo:  \
 	demux/adaptative/logic/$(am__dirstamp) \
 	demux/adaptative/logic/$(DEPDIR)/$(am__dirstamp)
 demux/adaptative/logic/libadaptative_plugin_la-AlwaysBestAdaptationLogic.lo:  \
+	demux/adaptative/logic/$(am__dirstamp) \
+	demux/adaptative/logic/$(DEPDIR)/$(am__dirstamp)
+demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo:  \
 	demux/adaptative/logic/$(am__dirstamp) \
 	demux/adaptative/logic/$(DEPDIR)/$(am__dirstamp)
 demux/adaptative/logic/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.lo:  \
@@ -13227,6 +13233,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-AbstractAdaptationLogic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-AlwaysBestAdaptationLogic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-GTIAdaptationLogic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-RateBasedAdaptationLogic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-Representationselectors.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@demux/adaptative/playlist/$(DEPDIR)/libadaptative_plugin_la-AbstractPlaylist.Plo@am__quote@
@@ -16545,6 +16552,13 @@ demux/adaptative/logic/libadaptative_plugin_la-AlwaysBestAdaptationLogic.lo: dem
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp' object='demux/adaptative/logic/libadaptative_plugin_la-AlwaysBestAdaptationLogic.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libadaptative_plugin_la_CXXFLAGS) $(CXXFLAGS) -c -o demux/adaptative/logic/libadaptative_plugin_la-AlwaysBestAdaptationLogic.lo `test -f 'demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp' || echo '$(srcdir)/'`demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp
+
+demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo: demux/adaptative/logic/GTIAdaptationLogic.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libadaptative_plugin_la_CXXFLAGS) $(CXXFLAGS) -MT demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo -MD -MP -MF demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-GTIAdaptationLogic.Tpo -c -o demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo `test -f 'demux/adaptative/logic/GTIAdaptationLogic.cpp' || echo '$(srcdir)/'`demux/adaptative/logic/GTIAdaptationLogic.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-GTIAdaptationLogic.Tpo demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-GTIAdaptationLogic.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='demux/adaptative/logic/GTIAdaptationLogic.cpp' object='demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libadaptative_plugin_la_CXXFLAGS) $(CXXFLAGS) -c -o demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo `test -f 'demux/adaptative/logic/GTIAdaptationLogic.cpp' || echo '$(srcdir)/'`demux/adaptative/logic/GTIAdaptationLogic.cpp
 
 demux/adaptative/logic/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.lo: demux/adaptative/logic/AlwaysLowestAdaptationLogic.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libadaptative_plugin_la_CXXFLAGS) $(CXXFLAGS) -MT demux/adaptative/logic/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.lo -MD -MP -MF demux/adaptative/logic/$(DEPDIR)/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.Tpo -c -o demux/adaptative/logic/libadaptative_plugin_la-AlwaysLowestAdaptationLogic.lo `test -f 'demux/adaptative/logic/AlwaysLowestAdaptationLogic.cpp' || echo '$(srcdir)/'`demux/adaptative/logic/AlwaysLowestAdaptationLogic.cpp

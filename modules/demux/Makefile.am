@@ -283,6 +283,8 @@ libadaptative_plugin_la_SOURCES = \
     demux/adaptative/logic/AbstractAdaptationLogic.h \
     demux/adaptative/logic/AlwaysBestAdaptationLogic.cpp \
     demux/adaptative/logic/AlwaysBestAdaptationLogic.h \
+    demux/adaptative/logic/GTIAdaptationLogic.cpp \
+    demux/adaptative/logic/GTIAdaptationLogic.h \
     demux/adaptative/logic/AlwaysLowestAdaptationLogic.cpp \
     demux/adaptative/logic/AlwaysLowestAdaptationLogic.hpp \
     demux/adaptative/logic/IDownloadRateObserver.h \

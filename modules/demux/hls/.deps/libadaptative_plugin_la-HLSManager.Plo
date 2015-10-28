@@ -47,8 +47,8 @@ demux/hls/libadaptative_plugin_la-HLSManager.lo: demux/hls/HLSManager.cpp \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h ../include/vlc_arrays.h \
  ../include/vlc_messages.h ../include/vlc_objects.h \
  ../include/vlc_variables.h ../include/vlc_main.h \
- ../include/vlc_configuration.h demux/hls/../adaptative/Streams.hpp \
- /usr/include/c++/4.9/string \
+ ../include/vlc_configuration.h \
+ demux/hls/../adaptative/logic/../Streams.hpp /usr/include/c++/4.9/string \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/cpu_defines.h \
@@ -106,8 +106,9 @@ demux/hls/libadaptative_plugin_la-HLSManager.lo: demux/hls/HLSManager.cpp \
  /usr/include/c++/4.9/bits/basic_string.tcc /usr/include/c++/4.9/list \
  /usr/include/c++/4.9/bits/stl_list.h /usr/include/c++/4.9/bits/list.tcc \
  ../include/vlc_es.h ../include/vlc_fourcc.h ../include/vlc_text_style.h \
- demux/hls/../adaptative/StreamsType.hpp \
- demux/hls/../adaptative/StreamFormat.hpp /usr/include/c++/4.9/vector \
+ demux/hls/../adaptative/logic/../StreamsType.hpp \
+ demux/hls/../adaptative/logic/../StreamFormat.hpp \
+ demux/hls/../adaptative/Streams.hpp /usr/include/c++/4.9/vector \
  /usr/include/c++/4.9/bits/stl_construct.h \
  /usr/include/c++/4.9/ext/alloc_traits.h \
  /usr/include/c++/4.9/bits/alloc_traits.h \
@@ -296,7 +297,7 @@ demux/hls/../adaptative/logic/IDownloadRateObserver.h:
 
 ../include/vlc_configuration.h:
 
-demux/hls/../adaptative/Streams.hpp:
+demux/hls/../adaptative/logic/../Streams.hpp:
 
 /usr/include/c++/4.9/string:
 
@@ -444,9 +445,11 @@ demux/hls/../adaptative/Streams.hpp:
 
 ../include/vlc_text_style.h:
 
-demux/hls/../adaptative/StreamsType.hpp:
+demux/hls/../adaptative/logic/../StreamsType.hpp:
 
-demux/hls/../adaptative/StreamFormat.hpp:
+demux/hls/../adaptative/logic/../StreamFormat.hpp:
+
+demux/hls/../adaptative/Streams.hpp:
 
 /usr/include/c++/4.9/vector:
 

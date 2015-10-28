@@ -163,9 +163,10 @@ demux/adaptative/libadaptative_plugin_la-adaptative.lo: \
  demux/adaptative/../dash/../adaptative/PlaylistManager.h \
  demux/adaptative/../dash/../adaptative/logic/AbstractAdaptationLogic.h \
  demux/adaptative/../dash/../adaptative/logic/IDownloadRateObserver.h \
+ demux/adaptative/../dash/../adaptative/logic/../Streams.hpp \
+ demux/adaptative/../dash/../adaptative/logic/../StreamsType.hpp \
+ demux/adaptative/../dash/../adaptative/logic/../StreamFormat.hpp \
  demux/adaptative/../dash/../adaptative/Streams.hpp \
- demux/adaptative/../dash/../adaptative/StreamsType.hpp \
- demux/adaptative/../dash/../adaptative/StreamFormat.hpp \
  demux/adaptative/../dash/../adaptative/logic/AbstractAdaptationLogic.h \
  demux/adaptative/../dash/mpd/MPD.h \
  demux/adaptative/../hls/HLSManager.hpp \
@@ -610,11 +611,13 @@ demux/adaptative/../dash/../adaptative/logic/AbstractAdaptationLogic.h:
 
 demux/adaptative/../dash/../adaptative/logic/IDownloadRateObserver.h:
 
+demux/adaptative/../dash/../adaptative/logic/../Streams.hpp:
+
+demux/adaptative/../dash/../adaptative/logic/../StreamsType.hpp:
+
+demux/adaptative/../dash/../adaptative/logic/../StreamFormat.hpp:
+
 demux/adaptative/../dash/../adaptative/Streams.hpp:
-
-demux/adaptative/../dash/../adaptative/StreamsType.hpp:
-
-demux/adaptative/../dash/../adaptative/StreamFormat.hpp:
 
 demux/adaptative/../dash/../adaptative/logic/AbstractAdaptationLogic.h:
 

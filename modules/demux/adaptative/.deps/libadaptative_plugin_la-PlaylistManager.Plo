@@ -48,7 +48,7 @@ demux/adaptative/libadaptative_plugin_la-PlaylistManager.lo: \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h ../include/vlc_arrays.h \
  ../include/vlc_messages.h ../include/vlc_objects.h \
  ../include/vlc_variables.h ../include/vlc_main.h \
- ../include/vlc_configuration.h demux/adaptative/Streams.hpp \
+ ../include/vlc_configuration.h demux/adaptative/logic/../Streams.hpp \
  /usr/include/c++/4.9/string \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h \
@@ -107,7 +107,8 @@ demux/adaptative/libadaptative_plugin_la-PlaylistManager.lo: \
  /usr/include/c++/4.9/bits/basic_string.tcc /usr/include/c++/4.9/list \
  /usr/include/c++/4.9/bits/stl_list.h /usr/include/c++/4.9/bits/list.tcc \
  ../include/vlc_es.h ../include/vlc_fourcc.h ../include/vlc_text_style.h \
- demux/adaptative/StreamsType.hpp demux/adaptative/StreamFormat.hpp \
+ demux/adaptative/logic/../StreamsType.hpp \
+ demux/adaptative/logic/../StreamFormat.hpp demux/adaptative/Streams.hpp \
  /usr/include/c++/4.9/vector /usr/include/c++/4.9/bits/stl_construct.h \
  /usr/include/c++/4.9/ext/alloc_traits.h \
  /usr/include/c++/4.9/bits/alloc_traits.h \
@@ -115,6 +116,7 @@ demux/adaptative/libadaptative_plugin_la-PlaylistManager.lo: \
  /usr/include/c++/4.9/bits/stl_vector.h \
  /usr/include/c++/4.9/bits/stl_bvector.h \
  /usr/include/c++/4.9/bits/vector.tcc demux/adaptative/SegmentTracker.hpp \
+ demux/adaptative/StreamsType.hpp \
  demux/adaptative/playlist/AbstractPlaylist.hpp \
  demux/adaptative/playlist/ICanonicalUrl.hpp \
  demux/adaptative/playlist/Url.hpp \
@@ -303,7 +305,7 @@ demux/adaptative/logic/IDownloadRateObserver.h:
 
 ../include/vlc_configuration.h:
 
-demux/adaptative/Streams.hpp:
+demux/adaptative/logic/../Streams.hpp:
 
 /usr/include/c++/4.9/string:
 
@@ -451,9 +453,11 @@ demux/adaptative/Streams.hpp:
 
 ../include/vlc_text_style.h:
 
-demux/adaptative/StreamsType.hpp:
+demux/adaptative/logic/../StreamsType.hpp:
 
-demux/adaptative/StreamFormat.hpp:
+demux/adaptative/logic/../StreamFormat.hpp:
+
+demux/adaptative/Streams.hpp:
 
 /usr/include/c++/4.9/vector:
 
@@ -472,6 +476,8 @@ demux/adaptative/StreamFormat.hpp:
 /usr/include/c++/4.9/bits/vector.tcc:
 
 demux/adaptative/SegmentTracker.hpp:
+
+demux/adaptative/StreamsType.hpp:
 
 demux/adaptative/playlist/AbstractPlaylist.hpp:
 

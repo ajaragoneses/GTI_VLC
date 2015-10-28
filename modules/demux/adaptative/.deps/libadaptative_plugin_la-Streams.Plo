@@ -117,6 +117,7 @@ demux/adaptative/libadaptative_plugin_la-Streams.lo: \
  /usr/include/c++/4.9/bits/vector.tcc \
  demux/adaptative/logic/AbstractAdaptationLogic.h \
  demux/adaptative/logic/IDownloadRateObserver.h \
+ demux/adaptative/logic/../Streams.hpp \
  demux/adaptative/playlist/SegmentChunk.hpp \
  demux/adaptative/playlist/ICanonicalUrl.hpp \
  demux/adaptative/playlist/Url.hpp \
@@ -449,6 +450,8 @@ demux/adaptative/http/HTTPConnectionManager.h:
 demux/adaptative/logic/AbstractAdaptationLogic.h:
 
 demux/adaptative/logic/IDownloadRateObserver.h:
+
+demux/adaptative/logic/../Streams.hpp:
 
 demux/adaptative/playlist/SegmentChunk.hpp:
 

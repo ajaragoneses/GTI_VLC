@@ -49,7 +49,8 @@ demux/dash/libadaptative_plugin_la-DASHManager.lo: \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h ../include/vlc_arrays.h \
  ../include/vlc_messages.h ../include/vlc_objects.h \
  ../include/vlc_variables.h ../include/vlc_main.h \
- ../include/vlc_configuration.h demux/dash/../adaptative/Streams.hpp \
+ ../include/vlc_configuration.h \
+ demux/dash/../adaptative/logic/../Streams.hpp \
  /usr/include/c++/4.9/string \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/4.9/bits/os_defines.h \
@@ -108,8 +109,9 @@ demux/dash/libadaptative_plugin_la-DASHManager.lo: \
  /usr/include/c++/4.9/bits/basic_string.tcc /usr/include/c++/4.9/list \
  /usr/include/c++/4.9/bits/stl_list.h /usr/include/c++/4.9/bits/list.tcc \
  ../include/vlc_es.h ../include/vlc_fourcc.h ../include/vlc_text_style.h \
- demux/dash/../adaptative/StreamsType.hpp \
- demux/dash/../adaptative/StreamFormat.hpp /usr/include/c++/4.9/vector \
+ demux/dash/../adaptative/logic/../StreamsType.hpp \
+ demux/dash/../adaptative/logic/../StreamFormat.hpp \
+ demux/dash/../adaptative/Streams.hpp /usr/include/c++/4.9/vector \
  /usr/include/c++/4.9/bits/stl_construct.h \
  /usr/include/c++/4.9/ext/alloc_traits.h \
  /usr/include/c++/4.9/bits/alloc_traits.h \
@@ -346,7 +348,7 @@ demux/dash/../adaptative/logic/IDownloadRateObserver.h:
 
 ../include/vlc_configuration.h:
 
-demux/dash/../adaptative/Streams.hpp:
+demux/dash/../adaptative/logic/../Streams.hpp:
 
 /usr/include/c++/4.9/string:
 
@@ -494,9 +496,11 @@ demux/dash/../adaptative/Streams.hpp:
 
 ../include/vlc_text_style.h:
 
-demux/dash/../adaptative/StreamsType.hpp:
+demux/dash/../adaptative/logic/../StreamsType.hpp:
 
-demux/dash/../adaptative/StreamFormat.hpp:
+demux/dash/../adaptative/logic/../StreamFormat.hpp:
+
+demux/dash/../adaptative/Streams.hpp:
 
 /usr/include/c++/4.9/vector:
 

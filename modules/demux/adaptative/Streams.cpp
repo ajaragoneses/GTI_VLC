@@ -172,6 +172,7 @@ void Stream::create(AbstractAdaptationLogic *logic, SegmentTracker *tracker,
     updateFormat(format);
     #ifndef NO_BUFFER
         buffer->setAdaptationLogic(logic);
+        adaptationLogic->setBuffer(buffer);
     #endif
 }
 
@@ -323,7 +324,7 @@ size_t Stream::read_real(HTTPConnectionManager *connManager){
             vlc_mutex_unlock( &lock_conMannager );
         }
         if(eof && buffer->bufferInSize() == 0 && buffer->size() == 0){
-            printf("Return 0!!\n");
+            // printf("Return 0!!\n");
             readsize = 0;
         } else {
             buffer_threadSave::data_download* dataInfo = buffer->pop();
@@ -416,8 +417,6 @@ size_t Stream::read(HTTPConnectionManager *connManager)
         if (newSegment){
             int segundosPorPresentar = time_total - buffer->getBufferTotalTimeOut();
             float paquetesAExtraer = ceil(float(segundosPorPresentar)/chunk->getSegmentDuration());
-
-
             if((buffer->size() == 0) ){
                 time_total = 0;
                 if(paquetesAExtraer  > buffer->bufferInSize() ){
@@ -449,7 +448,6 @@ size_t Stream::read(HTTPConnectionManager *connManager)
                     printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 }
             }
-
         }
     #endif
 
@@ -574,9 +572,10 @@ void buffer_threadSave::push(data_download* data){
         DEBUG("bufferTotalTimeIn: %li\n");
         buffer_interno_in.pop_front();
         DEBUG("%s\n","Desechamos...");
-    } else {
-        DEBUG("\033[1;33minToOut false!\033[0m\n");
-    }
+    } 
+    // else {
+    //     DEBUG("\033[1;33minToOut false!\033[0m\n");
+    // }
     
     DEBUG("PUSH: %li, TOTAL: %li\n", data->duration, bufferTotalTimeIn);
 
@@ -620,7 +619,6 @@ bool buffer_threadSave::inToOut(){
     // }
 
     if(adaptationLogic == NULL){
-        printf("NULL!!!\n");
         return true;
     }
     return adaptationLogic->bufferTransferLogic();
@@ -689,6 +687,10 @@ void buffer_threadSave::setTimeScale(int64_t timescale_l){
 
 int64_t buffer_threadSave::getFreezingTime(){
     return 0;
+}
+
+int buffer_threadSave::getMaxBufferSize(){
+    return MAX_BUFFER;
 }
 
 /*******************************************/

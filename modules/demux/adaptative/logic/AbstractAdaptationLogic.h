@@ -26,6 +26,7 @@
 #define ABSTRACTADAPTATIONLOGIC_H_
 
 #include "IDownloadRateObserver.h"
+  #include "../Streams.hpp"
 
 namespace adaptative
 {
@@ -48,6 +49,7 @@ namespace adaptative
                 virtual BaseRepresentation* getCurrentRepresentation(BaseAdaptationSet *) const = 0;
                 virtual void                updateDownloadRate     (size_t, mtime_t);
                 bool bufferTransferLogic();
+                void setBuffer(buffer_threadSave* buffer);
 
                 enum LogicType
                 {
@@ -58,6 +60,8 @@ namespace adaptative
                     GTI_Stairs,
                     FixedRate
                 };
+            protected:
+                buffer_threadSave* buffer = NULL;
         };
     }
 }

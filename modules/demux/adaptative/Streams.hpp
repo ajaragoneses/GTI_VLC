@@ -223,6 +223,7 @@ namespace adaptative
             int64_t getFreezingTime();
             int bufferInSize();
             void setAdaptationLogic(AbstractAdaptationLogic* logic);
+            int getMaxBufferSize();
 
         private:
             vlc_mutex_t  lock;

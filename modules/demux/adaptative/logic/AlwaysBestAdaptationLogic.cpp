@@ -89,6 +89,8 @@ StairsAdaptationLogic::StairsAdaptationLogic    (int w, int h) :
 
 BaseRepresentation *StairsAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
+
+	printf("Buffer Size desde la logica: %i\n", buffer->size());
     if(adaptSet == NULL){
     	return NULL;
     }

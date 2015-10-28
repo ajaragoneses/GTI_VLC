@@ -44,3 +44,7 @@ void AbstractAdaptationLogic::updateDownloadRate    (size_t, mtime_t)
 bool AbstractAdaptationLogic::bufferTransferLogic(){
 	return true;
 }
+
+void AbstractAdaptationLogic::setBuffer(buffer_threadSave* buffer){
+	this->buffer = buffer;
+}
