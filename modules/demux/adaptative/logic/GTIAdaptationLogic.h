@@ -45,7 +45,21 @@ namespace adaptative
             public:
                 GTIAdaptationLogic           (int w, int h);
 
-                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;  
+                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *);
+                void inicializar();
+
+            private:
+            
+                BaseRepresentation* next_rep;
+                BaseRepresentation* actual_rep;
+                bool RunningFastStart = true;
+                float Buff_delay = 0.0;
+                float BufferMax = 0.0;
+                float BufferHigh = 0.0;
+                float BufferLow = 0.0;
+                float BufferMin = 0.0;
+                float bufferOptimo = 0.0;
+                bool inicializado = false;
         };
     }
 }

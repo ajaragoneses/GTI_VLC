@@ -48,3 +48,5 @@ bool AbstractAdaptationLogic::bufferTransferLogic(){
 void AbstractAdaptationLogic::setBuffer(buffer_threadSave* buffer){
 	this->buffer = buffer;
 }
+
+void AbstractAdaptationLogic::inicializar(){}

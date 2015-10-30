@@ -173,6 +173,7 @@ void Stream::create(AbstractAdaptationLogic *logic, SegmentTracker *tracker,
     #ifndef NO_BUFFER
         buffer->setAdaptationLogic(logic);
         adaptationLogic->setBuffer(buffer);
+        // adaptationLogic->inicializar();
     #endif
 }
 
@@ -433,19 +434,19 @@ size_t Stream::read(HTTPConnectionManager *connManager)
                     // buffer_presentation = abs(aux_time - segm_decoded*Tseg);
                 }
                 if(congelacion){
-                    printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
-                    printf("PATH: %s\n", chunk->getPath().c_str());
-                    printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
-                    printf("time_total: %li\n", time_total);
-                    printf("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn(), (float)buffer->getBufferTotalTimeIn());
-                    printf("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut(), (float)buffer->getBufferTotalTimeOut());
-                    printf("Scale: %li\n", buffer->getTimeScale());
-                    printf("buffer_in: %f (%f)\n", (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale())*1000000 );
-                    printf("buffer_out: %f (%f)\n", (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale())*1000000);
-                    printf("time: %f\n", (float)time_total/1000000 );
-                    printf("\033[1;31mFREEZE!!!\033[0m\n");
-                    printf("Duracion congelacion: %i\n", duracionCongelacion);
-                    printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                    // printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
+                    // printf("PATH: %s\n", chunk->getPath().c_str());
+                    // printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
+                    // printf("time_total: %li\n", time_total);
+                    // printf("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn(), (float)buffer->getBufferTotalTimeIn());
+                    // printf("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut(), (float)buffer->getBufferTotalTimeOut());
+                    // printf("Scale: %li\n", buffer->getTimeScale());
+                    // printf("buffer_in: %f (%f)\n", (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale())*1000000 );
+                    // printf("buffer_out: %f (%f)\n", (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale())*1000000);
+                    // printf("time: %f\n", (float)time_total/1000000 );
+                    // printf("\033[1;31mFREEZE!!!\033[0m\n");
+                    // printf("Duracion congelacion: %i\n", duracionCongelacion);
+                    // printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
                 }
             }
         }

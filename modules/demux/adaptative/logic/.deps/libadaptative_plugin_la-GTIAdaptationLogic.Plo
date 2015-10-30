@@ -146,7 +146,8 @@ demux/adaptative/logic/libadaptative_plugin_la-GTIAdaptationLogic.lo: \
  /usr/include/c++/4.9/bits/sstream.tcc \
  demux/adaptative/logic/../playlist/../http/Chunk.h \
  demux/adaptative/logic/../playlist/../StreamFormat.hpp \
- demux/adaptative/logic/../playlist/BaseRepresentation.h
+ demux/adaptative/logic/../playlist/BaseRepresentation.h \
+ /usr/include/c++/4.9/iostream
 
 /usr/include/stdc-predef.h:
 
@@ -533,3 +534,5 @@ demux/adaptative/logic/../playlist/../http/Chunk.h:
 demux/adaptative/logic/../playlist/../StreamFormat.hpp:
 
 demux/adaptative/logic/../playlist/BaseRepresentation.h:
+
+/usr/include/c++/4.9/iostream:
