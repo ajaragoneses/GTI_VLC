@@ -49,4 +49,6 @@ void AbstractAdaptationLogic::setBuffer(buffer_threadSave* buffer){
 	this->buffer = buffer;
 }
 
-void AbstractAdaptationLogic::inicializar(){}
+void AbstractAdaptationLogic::inicializar(){
+	// printf("%s\n","abstractAdaptationLogic::inicializar" );
+}

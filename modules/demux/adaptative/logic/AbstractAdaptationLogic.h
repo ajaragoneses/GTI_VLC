@@ -46,7 +46,7 @@ namespace adaptative
                 AbstractAdaptationLogic             ();
                 virtual ~AbstractAdaptationLogic    ();
 
-                virtual BaseRepresentation* getCurrentRepresentation(BaseAdaptationSet *);
+                virtual BaseRepresentation* getCurrentRepresentation(BaseAdaptationSet *) const = 0;
                 virtual void                updateDownloadRate     (size_t, mtime_t);
                 bool bufferTransferLogic();
                 void setBuffer(buffer_threadSave* buffer);

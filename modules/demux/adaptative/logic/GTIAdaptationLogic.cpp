@@ -150,15 +150,16 @@ void GTIAdaptationLogic::inicializar(){
         BufferLow = 0.6*BufferMax;
         BufferMin = 0.3*BufferMax;
         bufferOptimo = 0.5*(BufferLow + BufferHigh);
-        cout << "BufferMax: " << BufferMax << "\n";
+        // cout << "BufferMax: " << BufferMax << "\n";
         inicializado = true;
 }
 
-BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet)
+BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
-    if(!inicializado && (buffer != NULL) ){
-        inicializar();
-    }
+    // if(!inicializado && (buffer != NULL) ){
+    //     cout << "inicializando" << "\n";
+    //     // inicializar();
+    // }
     RepresentationSelector selector;
     BaseRepresentation *rep = selector.select(adaptSet);
 

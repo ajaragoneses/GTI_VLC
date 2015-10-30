@@ -173,7 +173,7 @@ void Stream::create(AbstractAdaptationLogic *logic, SegmentTracker *tracker,
     #ifndef NO_BUFFER
         buffer->setAdaptationLogic(logic);
         adaptationLogic->setBuffer(buffer);
-        // adaptationLogic->inicializar();
+        adaptationLogic->inicializar();
     #endif
 }
 

@@ -45,7 +45,7 @@ namespace adaptative
             public:
                 GTIAdaptationLogic           (int w, int h);
 
-                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *);
+                virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;
                 void inicializar();
 
             private:
