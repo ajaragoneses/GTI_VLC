@@ -145,23 +145,39 @@ GTIAdaptationLogic::GTIAdaptationLogic    (int w, int h) :
 }
 
 void GTIAdaptationLogic::inicializar(){
-        BufferMax = buffer->getMaxBufferSize();
-        BufferHigh = 0.9*BufferMax;
-        BufferLow = 0.6*BufferMax;
-        BufferMin = 0.3*BufferMax;
-        bufferOptimo = 0.5*(BufferLow + BufferHigh);
-        // cout << "BufferMax: " << BufferMax << "\n";
-        inicializado = true;
+    GTIAlgorithm* algorithm = new GTIAlgorithm(buffer);
 }
 
 BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
     // if(!inicializado && (buffer != NULL) ){
     //     cout << "inicializando" << "\n";
-    //     // inicializar();
+    //    // inicializar();
     // }
+
+    // RepresentationSelector selector;
+    // BaseRepresentation *rep = selector.select(adaptSet);
+
+    // return rep;
+    return algorithm->getCurrentRepresentation(adaptSet);
+}
+
+/*************************************************************/
+
+GTIAlgorithm::GTIAlgorithm(buffer_threadSave* buff){
+    buffer = buff;
+    BufferMax = buffer->getMaxBufferSize();
+    BufferHigh = 0.9*BufferMax;
+    BufferLow = 0.6*BufferMax;
+    BufferMin = 0.3*BufferMax;
+    bufferOptimo = 0.5*(BufferLow + BufferHigh);
+}
+
+
+BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *adaptSet){
     RepresentationSelector selector;
     BaseRepresentation *rep = selector.select(adaptSet);
-
     return rep;
 }
+
+

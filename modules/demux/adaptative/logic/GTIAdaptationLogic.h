@@ -31,6 +31,25 @@ namespace adaptative
 {
     namespace logic
     {
+        class GTIAlgorithm
+        {
+            private:
+                BaseRepresentation* next_rep;
+                BaseRepresentation* actual_rep;
+                bool RunningFastStart = true;
+                float Buff_delay = 0.0;
+                float BufferMax = 0.0;
+                float BufferHigh = 0.0;
+                float BufferLow = 0.0;
+                float BufferMin = 0.0;
+                float bufferOptimo = 0.0;
+                bool inicializado = false;
+                buffer_threadSave* buffer = NULL;
+            
+            public:
+                GTIAlgorithm(buffer_threadSave* buff);
+                BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *adapSet);
+        };
 
         class StairsAdaptationLogic : public AbstractAdaptationLogic
         {
@@ -47,20 +66,12 @@ namespace adaptative
 
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;
                 void inicializar();
-
-            private:
             
-                BaseRepresentation* next_rep;
-                BaseRepresentation* actual_rep;
-                bool RunningFastStart = true;
-                float Buff_delay = 0.0;
-                float BufferMax = 0.0;
-                float BufferHigh = 0.0;
-                float BufferLow = 0.0;
-                float BufferMin = 0.0;
-                float bufferOptimo = 0.0;
-                bool inicializado = false;
+            private:
+                GTIAlgorithm* algorithm;    
+
         };
+
     }
 }
 
