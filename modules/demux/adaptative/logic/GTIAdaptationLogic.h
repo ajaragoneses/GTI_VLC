@@ -34,8 +34,9 @@ namespace adaptative
         class GTIAlgorithm
         {
             private:
-                BaseRepresentation* next_rep;
-                BaseRepresentation* actual_rep;
+                BaseRepresentation* next_rep = NULL;
+                BaseRepresentation* actual_rep = NULL;
+                BaseRepresentation* next_rep_candidato = NULL;
                 bool RunningFastStart = true;
                 float Buff_delay = 0.0;
                 float BufferMax = 0.0;
@@ -45,6 +46,7 @@ namespace adaptative
                 float bufferOptimo = 0.0;
                 bool inicializado = false;
                 buffer_threadSave* buffer = NULL;
+                int bandwith = 0;
             
             public:
                 GTIAlgorithm(buffer_threadSave* buff);

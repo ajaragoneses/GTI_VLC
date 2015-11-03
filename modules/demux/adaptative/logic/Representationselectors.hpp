@@ -44,6 +44,7 @@ namespace adaptative
         public:
             RepresentationSelector();
             virtual ~RepresentationSelector() {}
+            virtual BaseRepresentation * selectMin(BaseAdaptationSet *) const;
             virtual BaseRepresentation * select(BaseAdaptationSet *) const;
             virtual BaseRepresentation * select(BaseAdaptationSet *, uint64_t bitrate) const;
             virtual BaseRepresentation * select(BaseAdaptationSet *, uint64_t bitrate,

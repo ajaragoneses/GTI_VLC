@@ -3,7 +3,7 @@
  *****************************************************************************
  * Copyright (C) 2010 - 2011 Klagenfurt University
  *
- * Created on: Aug 10, 2010
+ * Created on: Aug 10. 2010
  * Authors: Christopher Mueller <christopher.mueller@itec.uni-klu.ac.at>
  *          Christian Timmerer  <christian.timmerer@itec.uni-klu.ac.at>
  *
@@ -145,20 +145,11 @@ GTIAdaptationLogic::GTIAdaptationLogic    (int w, int h) :
 }
 
 void GTIAdaptationLogic::inicializar(){
-    GTIAlgorithm* algorithm = new GTIAlgorithm(buffer);
+    algorithm = new GTIAlgorithm(buffer);
 }
 
 BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
-    // if(!inicializado && (buffer != NULL) ){
-    //     cout << "inicializando" << "\n";
-    //    // inicializar();
-    // }
-
-    // RepresentationSelector selector;
-    // BaseRepresentation *rep = selector.select(adaptSet);
-
-    // return rep;
     return algorithm->getCurrentRepresentation(adaptSet);
 }
 
@@ -175,7 +166,65 @@ GTIAlgorithm::GTIAlgorithm(buffer_threadSave* buff){
 
 
 BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *adaptSet){
+    
     RepresentationSelector selector;
+    BaseRepresentation *Max_rep = selector.select(adaptSet);
+    BaseRepresentation *Min_rep = selector.selectMin(adaptSet);
+    BaseRepresentation *previous_rep = selector.select(adaptSet);
+    actual_rep = selector.select(adaptSet);
+
+    float Buff_delay = 0.0;
+    int64_t duracion_segmento = 0;
+
+    if( RunningFastStart 
+        && (actual_rep->getBandwidth() != Max_rep->getBandwidth()) 
+        // && (BufferLevelMin(t1) <= BufferLevelMin(t2))  
+        && (actual_rep->getBandwidth() <= 0.75*bandwith) 
+        ){
+        if(buffer->size() < BufferMin){
+            if(next_rep_candidato->getBandwidth() <= 0.33*bandwith){
+                next_rep = next_rep_candidato;
+            }
+        } else if (buffer->size() < BufferLow){
+            if(next_rep_candidato->getBandwidth() <= 0.5*bandwith){
+                next_rep = next_rep_candidato;
+            }
+        } else {
+            if(next_rep_candidato->getBandwidth() <= 0.75*bandwith){
+                next_rep = next_rep_candidato;
+            }
+            if(buffer->size() > BufferHigh){
+                Buff_delay = BufferHigh - duracion_segmento;
+            }
+        }
+    }
+    else {   
+        RunningFastStart = false;
+        if( buffer->size() < BufferMin ){
+            next_rep = Min_rep;
+        }
+        else if( buffer->size() < BufferLow ){
+            if( (actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith) ){
+                actual_rep = previous_rep;
+            }       
+        }
+        else if( buffer->size() < BufferHigh){
+            if(  (actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
+                Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
+            }
+        }    
+        else{
+            if(  (actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
+                Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
+            }
+            else{
+                next_rep = next_rep_candidato;
+            }
+        }
+    }
+
+    /***************************************************/
+
     BaseRepresentation *rep = selector.select(adaptSet);
     return rep;
 }

@@ -29,6 +29,10 @@ RepresentationSelector::RepresentationSelector()
 {
 }
 
+BaseRepresentation * RepresentationSelector::selectMin(BaseAdaptationSet *adaptSet) const
+{
+    return select(adaptSet, std::numeric_limits<uint64_t>::min());
+}
 BaseRepresentation * RepresentationSelector::select(BaseAdaptationSet *adaptSet) const
 {
     return select(adaptSet, std::numeric_limits<uint64_t>::max());
