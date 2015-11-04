@@ -47,6 +47,7 @@ namespace adaptative
                 bool inicializado = false;
                 buffer_threadSave* buffer = NULL;
                 int bandwith = 0;
+                bool init_actual_rep = false;
             
             public:
                 GTIAlgorithm(buffer_threadSave* buff);

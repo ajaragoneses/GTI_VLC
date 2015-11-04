@@ -168,17 +168,25 @@ GTIAlgorithm::GTIAlgorithm(buffer_threadSave* buff){
 BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *adaptSet){
     
     RepresentationSelector selector;
+    
+    if(!init_actual_rep){
+        actual_rep = selector.selectMin(adaptSet);
+        init_actual_rep = true;
+    }
+
     BaseRepresentation *Max_rep = selector.select(adaptSet);
     BaseRepresentation *Min_rep = selector.selectMin(adaptSet);
-    BaseRepresentation *previous_rep = selector.select(adaptSet);
-    actual_rep = selector.select(adaptSet);
+    BaseRepresentation *previous_rep = actual_rep;
+    BaseRepresentation *next_rep_candidato = selector.select(adaptSet, previous_rep->getBandwidth());
+
 
     float Buff_delay = 0.0;
     int64_t duracion_segmento = 0;
 
+    // printf("Primer if\n");
     if( RunningFastStart 
         && (actual_rep->getBandwidth() != Max_rep->getBandwidth()) 
-        // && (BufferLevelMin(t1) <= BufferLevelMin(t2))  
+        // && (BufferLevelMin(t1) <= BufferLevelMin(t2))
         && (actual_rep->getBandwidth() <= 0.75*bandwith) 
         ){
         if(buffer->size() < BufferMin){
@@ -198,7 +206,7 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
             }
         }
     }
-    else {   
+    else {
         RunningFastStart = false;
         if( buffer->size() < BufferMin ){
             next_rep = Min_rep;
@@ -206,6 +214,7 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
         else if( buffer->size() < BufferLow ){
             if( (actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith) ){
                 actual_rep = previous_rep;
+                // return actual_rep;
             }       
         }
         else if( buffer->size() < BufferHigh){
@@ -225,6 +234,7 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
 
     /***************************************************/
 
+    printf("%i\n",next_rep->getBandwidth() );
     BaseRepresentation *rep = selector.select(adaptSet);
     return rep;
 }
