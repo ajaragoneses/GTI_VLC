@@ -46,19 +46,23 @@ namespace adaptative
                 float bufferOptimo = 0.0;
                 bool inicializado = false;
                 buffer_threadSave* buffer = NULL;
-                int bandwith = 0;
+                float bandwith = 0.0;
+                float bandwithAux = 0.0;
+                float totaltime = 0.0;
                 bool init_actual_rep = false;
+                bool notificarCambio = false;
             
             public:
                 GTIAlgorithm(buffer_threadSave* buff);
                 BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *adapSet);
+                void updateDownloadRate(size_t size, mtime_t time);
+                void setCalculateDownloadRate();
         };
 
         class StairsAdaptationLogic : public AbstractAdaptationLogic
         {
             public:
                 StairsAdaptationLogic           (int w, int h);
-
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;  
         };
 
@@ -66,9 +70,10 @@ namespace adaptative
         {
             public:
                 GTIAdaptationLogic           (int w, int h);
-
+                void updateDownloadRate(size_t size, mtime_t time);
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;
                 void inicializar();
+                void setCalculateDownloadRate();
             
             private:
                 GTIAlgorithm* algorithm;    

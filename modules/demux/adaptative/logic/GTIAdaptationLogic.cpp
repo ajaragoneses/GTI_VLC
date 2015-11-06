@@ -148,9 +148,17 @@ void GTIAdaptationLogic::inicializar(){
     algorithm = new GTIAlgorithm(buffer);
 }
 
+void GTIAdaptationLogic::updateDownloadRate(size_t size, mtime_t time){
+    algorithm->updateDownloadRate(size,time);
+}
+
 BaseRepresentation *GTIAdaptationLogic::getCurrentRepresentation(BaseAdaptationSet *adaptSet) const
 {
     return algorithm->getCurrentRepresentation(adaptSet);
+}
+
+void GTIAdaptationLogic::setCalculateDownloadRate(){
+    algorithm->setCalculateDownloadRate();
 }
 
 /*************************************************************/
@@ -162,8 +170,28 @@ GTIAlgorithm::GTIAlgorithm(buffer_threadSave* buff){
     BufferLow = 0.6*BufferMax;
     BufferMin = 0.3*BufferMax;
     bufferOptimo = 0.5*(BufferLow + BufferHigh);
+    // printf("%f, %f, %f, %f, %f\n", BufferMax, BufferHigh, BufferLow, BufferMin, bufferOptimo );
 }
 
+void GTIAlgorithm::updateDownloadRate(size_t size, mtime_t time)
+{
+    // printf("time:%i\n",time );
+    if(unlikely(time == 0))
+        return;
+    if(!notificarCambio){
+        bandwithAux += size;//(size/time);
+        totaltime += time;
+        // printf("bandwithAux: %f\n", bandwithAux);
+    } else {
+        bandwith = bandwithAux/(totaltime/1000000);
+        printf("bandwithAux: %f\n",bandwithAux );
+        printf("totaltime: %f\n", totaltime/1000000);
+        printf("bandwith: %f\n",bandwith );
+        bandwithAux = 0.0;
+        totaltime = 0.0;
+        notificarCambio = false;
+    }
+}
 
 BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *adaptSet){
     
@@ -184,6 +212,7 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
     int64_t duracion_segmento = 0;
 
     // printf("Primer if\n");
+    printf("actual_rep->getBandwidth(): %i\n",actual_rep->getBandwidth() );
     if( RunningFastStart 
         && (actual_rep->getBandwidth() != Max_rep->getBandwidth()) 
         // && (BufferLevelMin(t1) <= BufferLevelMin(t2))
@@ -191,17 +220,21 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
         ){
         if(buffer->size() < BufferMin){
             if(next_rep_candidato->getBandwidth() <= 0.33*bandwith){
+                // printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.33*bandwith");
                 next_rep = next_rep_candidato;
             }
         } else if (buffer->size() < BufferLow){
             if(next_rep_candidato->getBandwidth() <= 0.5*bandwith){
-                next_rep = next_rep_candidato;
+                printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith");
+                // next_rep = next_rep_candidato;
             }
         } else {
-            if(next_rep_candidato->getBandwidth() <= 0.75*bandwith){
+            if(next_rep_candidato->getBandwidth() <= 0.5*bandwith){
+                // printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith" );
                 next_rep = next_rep_candidato;
             }
             if(buffer->size() > BufferHigh){
+                // printf("%s\n","buffer->size() > BufferHigh" );
                 Buff_delay = BufferHigh - duracion_segmento;
             }
         }
@@ -209,24 +242,29 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
     else {
         RunningFastStart = false;
         if( buffer->size() < BufferMin ){
+            // printf("%s\n", "buffer->size() < BufferMin");
             next_rep = Min_rep;
         }
         else if( buffer->size() < BufferLow ){
             if( (actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith) ){
+                // printf("%s\n", "(actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith)");
                 actual_rep = previous_rep;
                 // return actual_rep;
             }       
         }
         else if( buffer->size() < BufferHigh){
             if(  (actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
+                // printf("%s\n", "(actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
                 Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
             }
         }    
         else{
             if(  (actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
+                // printf("%s\n", "(actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
                 Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
             }
             else{
+                // printf("%s\n", "Else");
                 next_rep = next_rep_candidato;
             }
         }
@@ -234,9 +272,12 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
 
     /***************************************************/
 
-    printf("%i\n",next_rep->getBandwidth() );
+    printf("next_rep: %i\n",next_rep->getBandwidth() );
     BaseRepresentation *rep = selector.select(adaptSet);
     return rep;
 }
 
-
+void GTIAlgorithm::setCalculateDownloadRate(){
+    // printf("CAMBIO!!\n");
+    notificarCambio = true;
+}

@@ -50,6 +50,7 @@ namespace adaptative
                 virtual void                updateDownloadRate     (size_t, mtime_t);
                 bool bufferTransferLogic();
                 void setBuffer(buffer_threadSave* buffer);
+                virtual void setCalculateDownloadRate();
                 virtual void inicializar();
 
                 enum LogicType

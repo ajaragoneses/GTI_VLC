@@ -389,6 +389,7 @@ size_t Stream::read(HTTPConnectionManager *connManager)
             return 0;
         }
         b_segment_head_chunk = true;
+        adaptationLogic->setCalculateDownloadRate();
     }
     /* Because we don't know Chunk size at start, we need to get size
        from content length */
