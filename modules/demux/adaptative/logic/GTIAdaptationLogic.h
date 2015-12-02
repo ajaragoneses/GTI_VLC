@@ -37,20 +37,23 @@ namespace adaptative
                 BaseRepresentation* next_rep = NULL;
                 BaseRepresentation* actual_rep = NULL;
                 BaseRepresentation* next_rep_candidato = NULL;
-                bool RunningFastStart = true;
-                float Buff_delay = 0.0;
-                float BufferMax = 0.0;
-                float BufferHigh = 0.0;
-                float BufferLow = 0.0;
-                float BufferMin = 0.0;
-                float bufferOptimo = 0.0;
-                bool inicializado = false;
                 buffer_threadSave* buffer = NULL;
-                float bandwith = 0.0;
-                float bandwithAux = 0.0;
-                float totaltime = 0.0;
+                
+                bool RunningFastStart = true;
+                bool inicializado = false;
                 bool init_actual_rep = false;
                 bool notificarCambio = false;
+                
+                int64_t Buff_delay = 0;
+                int64_t BufferMax = 0;
+                int64_t BufferHigh = 0;
+                int64_t BufferLow = 0;
+                int64_t BufferMin = 0;
+                int64_t bufferOptimo = 0;
+                
+                // int64_t bandwith = 0;
+                int64_t bandwithAux = 0;
+                int64_t totaltime = 0;
             
             public:
                 GTIAlgorithm(buffer_threadSave* buff);

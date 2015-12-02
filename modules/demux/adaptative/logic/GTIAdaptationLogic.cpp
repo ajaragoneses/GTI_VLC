@@ -166,29 +166,23 @@ void GTIAdaptationLogic::setCalculateDownloadRate(){
 GTIAlgorithm::GTIAlgorithm(buffer_threadSave* buff){
     buffer = buff;
     BufferMax = buffer->getMaxBufferSize();
-    BufferHigh = 0.9*BufferMax;
-    BufferLow = 0.6*BufferMax;
-    BufferMin = 0.3*BufferMax;
-    bufferOptimo = 0.5*(BufferLow + BufferHigh);
-    // printf("%f, %f, %f, %f, %f\n", BufferMax, BufferHigh, BufferLow, BufferMin, bufferOptimo );
+    BufferHigh = (BufferMax/100)*90;
+    BufferLow = (BufferMax/100)*60;
+    BufferMin = (BufferMax/100)*30;
+    bufferOptimo = (BufferLow + BufferHigh)/2;
+    DEBUG("%lli, %lli, %lli, %lli, %lli\n", BufferMax, BufferHigh, BufferLow, BufferMin, bufferOptimo );
 }
 
 void GTIAlgorithm::updateDownloadRate(size_t size, mtime_t time)
-{
-    // printf("time:%i\n",time );
+{  
     if(unlikely(time == 0))
         return;
     if(!notificarCambio){
-        bandwithAux += size;//(size/time);
+        bandwithAux += size;
         totaltime += time;
-        // printf("bandwithAux: %f\n", bandwithAux);
     } else {
-        bandwith = bandwithAux/(totaltime/1000000);
-        printf("bandwithAux: %f\n",bandwithAux );
-        printf("totaltime: %f\n", totaltime/1000000);
-        printf("bandwith: %f\n",bandwith );
-        bandwithAux = 0.0;
-        totaltime = 0.0;
+        bandwithAux = 0;
+        totaltime = 0;
         notificarCambio = false;
     }
 }
@@ -198,6 +192,7 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
     RepresentationSelector selector;
     
     if(!init_actual_rep){
+        DEBUG("%s\n", "Iniciando actual_rep...");
         actual_rep = selector.selectMin(adaptSet);
         init_actual_rep = true;
     }
@@ -205,76 +200,115 @@ BaseRepresentation * GTIAlgorithm::getCurrentRepresentation(BaseAdaptationSet *a
     BaseRepresentation *Max_rep = selector.select(adaptSet);
     BaseRepresentation *Min_rep = selector.selectMin(adaptSet);
     BaseRepresentation *previous_rep = actual_rep;
-    BaseRepresentation *next_rep_candidato = selector.select(adaptSet, previous_rep->getBandwidth());
+    BaseRepresentation *next_rep_candidato;
 
 
-    float Buff_delay = 0.0;
+    // float Buff_delay = 0.0;
     int64_t duracion_segmento = 0;
 
-    // printf("Primer if\n");
-    printf("actual_rep->getBandwidth(): %i\n",actual_rep->getBandwidth() );
-    if( RunningFastStart 
-        && (actual_rep->getBandwidth() != Max_rep->getBandwidth()) 
-        // && (BufferLevelMin(t1) <= BufferLevelMin(t2))
-        && (actual_rep->getBandwidth() <= 0.75*bandwith) 
-        ){
-        if(buffer->size() < BufferMin){
-            if(next_rep_candidato->getBandwidth() <= 0.33*bandwith){
-                // printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.33*bandwith");
-                next_rep = next_rep_candidato;
-            }
-        } else if (buffer->size() < BufferLow){
-            if(next_rep_candidato->getBandwidth() <= 0.5*bandwith){
-                printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith");
-                // next_rep = next_rep_candidato;
-            }
-        } else {
-            if(next_rep_candidato->getBandwidth() <= 0.5*bandwith){
-                // printf("%s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith" );
-                next_rep = next_rep_candidato;
-            }
-            if(buffer->size() > BufferHigh){
-                // printf("%s\n","buffer->size() > BufferHigh" );
-                Buff_delay = BufferHigh - duracion_segmento;
-            }
+
+
+
+    std::vector<BaseRepresentation *> reps = adaptSet->getRepresentations();
+    DEBUG("Reps Size: %i\n", reps.size());
+    for(uint i = 0; i < reps.size(); i++){
+        DEBUG("%ix%i --> %i\n", reps[i]->getWidth(), reps[i]->getHeight(), reps[i]->getBandwidth());
+        if(reps[i]->getWidth() == width && reps[i]->getHeight() == height && reps[i]->getBandwidth() >= previous_rep->getBandwidth()+1){
+            next_rep_candidato = reps[i];
+            break;
         }
     }
-    else {
-        RunningFastStart = false;
-        if( buffer->size() < BufferMin ){
-            // printf("%s\n", "buffer->size() < BufferMin");
-            next_rep = Min_rep;
-        }
-        else if( buffer->size() < BufferLow ){
-            if( (actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith) ){
-                // printf("%s\n", "(actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith)");
-                actual_rep = previous_rep;
-                // return actual_rep;
-            }       
-        }
-        else if( buffer->size() < BufferHigh){
-            if(  (actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
-                // printf("%s\n", "(actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
-                Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
+
+    DEBUG("previous_rep->getBandwidth(): %lli\n", previous_rep->getBandwidth());
+    DEBUG("next_rep_candidato->getBandwidth(): %lli\n", next_rep_candidato->getBandwidth()); 
+
+
+
+    if(totaltime > 0){
+        int64_t bandwith = (1000000*(bandwithAux*16)/totaltime);
+        DEBUG("actual_rep->getBandwidth() <= 0.75*bandwith: %lli ,%lli, %lli\n",actual_rep->getBandwidth(), bandwith, 75*(1000000*(bandwithAux*16)/totaltime)/100 );
+        if( RunningFastStart 
+            && (actual_rep->getBandwidth() != Max_rep->getBandwidth()) 
+            // && (BufferLevelMin(t1) <= BufferLevelMin(t2))
+            && (actual_rep->getBandwidth() <= (bandwith/100)*75) 
+            ){
+            if(buffer->size() < BufferMin){
+                if(next_rep_candidato->getBandwidth() <= (bandwith/100)*33){
+                    printf("1. %s\n", "next_rep_candidato->getBandwidth() <= 0.33*bandwith");
+                    next_rep = next_rep_candidato;
+                }            
+            } else if (buffer->size() < BufferLow){
+                if(next_rep_candidato->getBandwidth() <= (bandwith/100)*50){
+                    printf("2. s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith");
+                    next_rep = next_rep_candidato
+;                }
+            } else {
+                if(next_rep_candidato->getBandwidth() <= (bandwith/100)*50){
+                    printf("3. %s\n", "next_rep_candidato->getBandwidth() <= 0.5*bandwith" );
+                    next_rep = next_rep_candidato;
+                }
+                if(buffer->size() > BufferHigh){
+                    printf("4. %s\n","buffer->size() > BufferHigh" );
+                    // Buff_delay = BufferHigh - totaltime;
+                    Buff_delay = BufferHigh;
+                    printf("4. Buff_delay: %lli, size: %lli\n", Buff_delay, buffer->size() );
+                    // printf("4. Espera...\n" );
+                    while(buffer->size() > Buff_delay);
+                    // printf("4. Fin de la espera.\n" );
+                }
             }
-        }    
-        else{
-            if(  (actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith) ){
-                // printf("%s\n", "(actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
-                Buff_delay = max(BufferHigh - duracion_segmento, bufferOptimo);
-            }
-            else{
-                // printf("%s\n", "Else");
-                next_rep = next_rep_candidato;
+        } else {
+            // DEBUG("%i, %i, %i\n", buffer->size() , BufferMin, buffer->size() < BufferMin);
+            RunningFastStart = false;
+            if( buffer->size() < BufferMin ){
+                printf("5. buffer->size() < BufferMin => %lli < %lli\n", buffer->size(), BufferMin);
+                next_rep = Min_rep;
+            }else if( buffer->size() < BufferLow ){
+                printf("6. %s\n", "(actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith)");
+                if( (actual_rep->getBandwidth() != Min_rep->getBandwidth()) && (actual_rep->getBandwidth() >= bandwith) ){
+                    actual_rep = previous_rep;
+                    return actual_rep;
+                }       
+            }else if( buffer->size() < BufferHigh){
+                if(  (actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= (bandwith/100)*90) ){
+                    printf("7. %s\n", "(actual_rep->getBandwidth() == Max_rep->getBandwidth()) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
+                    Buff_delay = max(BufferHigh - totaltime, bufferOptimo);
+                    // Buff_delay = max(buffer->size(), bufferOptimo);
+                    printf("7. Buff_delay: %lli, size: %lli\n", Buff_delay, buffer->size() );
+                    printf("7. Espera...\n" );
+                    while(buffer->size() > Buff_delay);
+                    printf("7. Fin de la espera.\n" );
+
+                }
+            }else{
+                if(  (actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= (bandwith/100)*90) ){
+                    printf("8. %s\n", "(actual_rep == Max_rep) || (next_rep_candidato->getBandwidth() >= 0.9*bandwith)");
+                    Buff_delay = max(buffer->size() - totaltime, bufferOptimo);
+                    // Buff_delay = max(buffer->size(), bufferOptimo);
+                    // printf("%lli\n",totaltime );
+                    printf("8. Espera...\n");
+                    while(buffer->size() > Buff_delay);
+                    printf("8. Fin de la espera.\n" );
+
+                    printf("8. Buff_delay: %lli, size: %lli\n", Buff_delay, buffer->size() );
+                }
+                else{
+                    printf("9. %s\n", "Else");
+                    next_rep = next_rep_candidato;
+                }
             }
         }
+    } else {
+        printf("%s\n", "10. next_rep = actual_rep (default)");
+        next_rep = actual_rep;
     }
 
     /***************************************************/
 
-    printf("next_rep: %i\n",next_rep->getBandwidth() );
-    BaseRepresentation *rep = selector.select(adaptSet);
-    return rep;
+    DEBUG("buffer->size(): %i\n", buffer->size());
+    DEBUG("next_rep->getBandwidth(): %i\n",next_rep->getBandwidth() );
+    actual_rep = next_rep;
+    return actual_rep;
 }
 
 void GTIAlgorithm::setCalculateDownloadRate(){

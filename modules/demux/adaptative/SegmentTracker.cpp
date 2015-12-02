@@ -104,6 +104,7 @@ SegmentChunk * SegmentTracker::getNextChunk(bool switch_allowed)
         initializing = false;
         segment = rep->getSegment(BaseRepresentation::INFOTYPE_INIT);
         if(segment){
+        DEBUG("%s\n", "Fin inicializacion");
             return segment->toChunk(count, rep);
         }
     }
@@ -120,7 +121,7 @@ SegmentChunk * SegmentTracker::getNextChunk(bool switch_allowed)
     segment = rep->getSegment(BaseRepresentation::INFOTYPE_MEDIA, count);
     if(!segment)
     {
-        printf("RESET!\n");
+        // printf("RESET!\n");
         resetCounter();
         return NULL;
     }
