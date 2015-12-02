@@ -85,6 +85,7 @@ mtime_t time_total = 0;
 
 buffer_threadSave *buffer;
 
+int contador_lectura = 0;
 
 void *Stream::EventThread(void *data){
     static_cast<Stream*>(data)->thread_buffer();
@@ -394,8 +395,9 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     /* Because we don't know Chunk size at start, we need to get size
        from content length */
     readsize = chunk->getBytesToRead();
-    if (readsize > 32768)
-        readsize = 32768;
+    // printf("Lenght: %i\n", chunk->getLength());
+    // if (readsize > 32768)
+    //     readsize = 32768;
 
     // printf("Readsize: %i\n", readsize);
 
@@ -407,6 +409,8 @@ size_t Stream::read(HTTPConnectionManager *connManager)
     ssize_t ret = chunk->getConnection()->read(block->p_buffer, readsize);
     time = mdate() - time;
 
+    // printf("contador lectura: %i\n", ++contador_lectura );
+    // printf("ret: %i\n",ret );
 
     #ifndef NO_BUFFER
 
