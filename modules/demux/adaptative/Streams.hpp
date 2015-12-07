@@ -216,6 +216,7 @@ namespace adaptative
             int size();
             data_download* pop();
             void empty();
+            int getSegmentDuration();
             int64_t getBufferTotalTimeIn();
             int64_t getBufferTotalTimeOut();
             int64_t getTimeScale();
