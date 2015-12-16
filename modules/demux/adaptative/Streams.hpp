@@ -87,7 +87,7 @@ namespace adaptative
 
     private:
         void movePackages(mtime_t time, SegmentChunk *chunk);
-        bool checkFreeze(mtime_t time, SegmentChunk *chunk);
+        int64_t checkFreeze(mtime_t time, SegmentChunk *chunk);
         SegmentChunk *getChunk();
         size_t read(HTTPConnectionManager *);
         demux_t *p_demux;

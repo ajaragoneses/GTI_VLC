@@ -92,7 +92,6 @@ void *Stream::EventThread(void *data){
 
 void *Stream::thread_buffer(){
     printf("thread_end: %i\n", thread_end);
-    // while(!thread_end){
     while(!eof){
         vlc_mutex_lock(&lock_conMannager);
         while (connManagerGlobal == NULL){ /* No hay connManagerGlobal */
@@ -419,24 +418,24 @@ size_t Stream::read_real(HTTPConnectionManager *connManager)
         int paquetesAExtraer = 0;
         int64_t segundosPorPresentar = 0;
 
-        DEBUG("primer segmento: %i\n",primer_segmento );
-        if(!primer_segmento){
-            DEBUG("NEW SEGMENT: %i\n", ++contador_lectura);
-            segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
-            if(segundosPorPresentar > 0 && chunk->getSegmentDuration() != 0){        
-                DEBUG("\033[0;36msegundos por presentar: %lli\033[0m\n", segundosPorPresentar);
-                DEBUG("\033[0;36mduracion del segmento: %lli\033[0m\n", chunk->getSegmentDuration());
-                paquetesAExtraer = segundosPorPresentar/chunk->getSegmentDuration();
-                DEBUG("\033[0;36mPaquetes a extraer: %lli\033[0m\n", paquetesAExtraer);
-            }
-            DEBUG("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale());
-            DEBUG("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale());
-            DEBUG("PATH: %s\n", chunk->getPath().c_str());
+        // DEBUG("primer segmento: %i\n",primer_segmento );
+        // if(!primer_segmento){
+        //     DEBUG("NEW SEGMENT: %i\n", ++contador_lectura);
+        //     segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
+        //     if(segundosPorPresentar > 0 && chunk->getSegmentDuration() != 0){        
+        //         DEBUG("\033[0;36msegundos por presentar: %lli\033[0m\n", segundosPorPresentar);
+        //         DEBUG("\033[0;36mduracion del segmento: %lli\033[0m\n", chunk->getSegmentDuration());
+        //         paquetesAExtraer = segundosPorPresentar/chunk->getSegmentDuration();
+        //         DEBUG("\033[0;36mPaquetes a extraer: %lli\033[0m\n", paquetesAExtraer);
+        //     }
+        //     DEBUG("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale());
+        //     DEBUG("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale());
 
-            if(!primer_segmento && checkFreeze(time, chunk)){
-                DEBUG("\033[1;31mCONGELACION\033[0m\n");
-            }
-        } // primer_segmento
+        // } // primer_segmento
+        DEBUG("PATH: %s\n", chunk->getPath().c_str());  
+        if(!primer_segmento && checkFreeze(time, chunk)){
+            DEBUG("\033[1;31mCONGELACION\033[0m\n");
+        }
     #endif
 
     if(ret < 0)
@@ -483,6 +482,8 @@ size_t Stream::read_real(HTTPConnectionManager *connManager)
 
         /*Comprobamos la disponibilidad de segmentos en el buffer de presentacion*/
         movePackages(time, chunk);
+        printf("total time buffer (IN): %lli (%lli)\n", buffer->getBufferTotalTimeIn(), buffer->bufferInSize() );
+        printf("total time buffer (OUT): %lli (%lli)\n", buffer->getBufferTotalTimeOut(), buffer->size() );
     #else
         if(output)
             output->pushBlock(block, b_segment_head_chunk);
@@ -525,35 +526,7 @@ void Stream::prune()
 }
 
 void Stream::movePackages(mtime_t time, SegmentChunk *chunk){
-    /*
-    1.- si buffer->getBufferTotalTimeOut() >= time = no se saca nada
-    2.- si no:
-            2.1.- calculamos cuanto queda por mostrar:
-                    timeAux = time - buffer->getBufferTotalTimeOut();
-                    paquetesAExtraer = timeAux/chunk->getSegmentDuration();
-            2.2.- Comprobamos si hay suficientes segmentos:
-                    if(paquetesAExtraer > buffer->size()){
-                        paquetesAExtraer = buffer->size();
-                        duracionCongelacion = timeAux - paquetesAExtraer*chunk->getSegmentDuration();
-                        buffer->moveInToOut(paquetesAExtraer)
-                    } else {
-                        ?¿?¿?¿?¿?¿?¿?¿?¿?
-                    }
-            2.3.- Si se ha producido congelacion:
-                    el segmento que acab ade descargarse se empuja directamente al buffer de presentacion:
-                    buffer->moveInToOut(1)
-                  Si no:
-                    el segmento permanece en el buffer
-            2.4.- Si el buffer está vacío
-                    si  time >= buffer->getBufferTotalTimeOut()
-                        se almacena en el buffer de descarga
-                    si no
-                        se pasa al buffer de presentación el segmento descargado    
-    */
-
-
     if(chunk->getSegmentDuration() > 0){    
-        
         int64_t segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
         int paquetesAExtraer = segundosPorPresentar/chunk->getSegmentDuration();
         /*Comprobamos la disponibilidad de segmentos en el buffer de presentacion*/
@@ -568,7 +541,6 @@ void Stream::movePackages(mtime_t time, SegmentChunk *chunk){
             paquetesAExtraer = timeAux/chunk->getSegmentDuration();
             if(paquetesAExtraer > buffer->bufferInSize()){
                 paquetesAExtraer = buffer->bufferInSize();
-                int64_t duracionCongelacion = timeAux - paquetesAExtraer*chunk->getSegmentDuration();
             }
             buffer->moveInToOut(paquetesAExtraer);
         }
@@ -578,7 +550,7 @@ void Stream::movePackages(mtime_t time, SegmentChunk *chunk){
     }
 }
 
-bool Stream::checkFreeze(mtime_t time, SegmentChunk *chunk){
+int64_t Stream::checkFreeze(mtime_t time, SegmentChunk *chunk){
     bool congelacion = false;
     int duracionCongelacion = 0;
     int64_t segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
@@ -591,30 +563,13 @@ bool Stream::checkFreeze(mtime_t time, SegmentChunk *chunk){
             // Se produce congelación y la duración de la misma
             congelacion = true; 
             duracionCongelacion = segundosPorPresentar - buffer->getBufferTotalTimeOut();
+            printf("\033[0;36mDuracion congelacion: %i\033[0m\n", duracionCongelacion);
         } else {
             congelacion = false; 
             duracionCongelacion = 0;
-            // Actualizamos el búfer de presentación: Número de segundos del último segmento que ha salido del búfer, que no se han 
-            // presentado al usuario.
-            // buffer_presentation = abs(aux_time - segm_decoded*Tseg);
-        }
-        if(congelacion){
-            // printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
-            // // printf("PATH: %s\n", chunk->getPath().c_str());
-            // printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
-            // printf("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn(), (float)buffer->getBufferTotalTimeIn());
-            // printf("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut(), (float)buffer->getBufferTotalTimeOut());
-            // printf("Scale: %li\n", buffer->getTimeScale());
-            // printf("buffer_in: %f (%f)\n", (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale())*1000000 );
-            // printf("buffer_out: %f (%f)\n", (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale())*1000000);
-            // printf("segundos por presentar: %i, paquetes a extraer: %i\n",segundosPorPresentar, paquetesAExtraer );
-            // printf("\033[1;31mFREEZE!!!\033[0m\n");
-            printf("\033[0;36mDuracion congelacion: %i\033[0m\n", duracionCongelacion);
-            // printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
-            return true;
         }
     }
-    return false;
+    return duracionCongelacion;
 }
 /*******************************************/
 
