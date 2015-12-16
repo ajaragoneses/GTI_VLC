@@ -80,8 +80,6 @@ vlc_mutex_t  lock_conMannager;
 vlc_cond_t   no_connManager;
 bool thread_end = false;
 HTTPConnectionManager *connManagerGlobal = NULL;
-mtime_t time_total = 0;
-
 
 buffer_threadSave *buffer;
 
@@ -423,7 +421,6 @@ size_t Stream::read_real(HTTPConnectionManager *connManager)
 
         DEBUG("primer segmento: %i\n",primer_segmento );
         if(!primer_segmento){
-            time_total = time/1000000;
             DEBUG("NEW SEGMENT: %i\n", ++contador_lectura);
             segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
             if(segundosPorPresentar > 0 && chunk->getSegmentDuration() != 0){        
@@ -588,7 +585,6 @@ bool Stream::checkFreeze(mtime_t time, SegmentChunk *chunk){
     int paquetesAExtraer = segundosPorPresentar/chunk->getSegmentDuration();
 
     if((buffer->size() == 0) ){
-        time_total = 0;
         if(paquetesAExtraer  > buffer->bufferInSize() ){
             // Fijamos que solo se extraiga lo que hay
             paquetesAExtraer = buffer->bufferInSize(); /*bufferCliente.size();*/
@@ -606,13 +602,11 @@ bool Stream::checkFreeze(mtime_t time, SegmentChunk *chunk){
             // printf("++++++++++++++++++++++++++++++++++++++++++++++++\n");
             // // printf("PATH: %s\n", chunk->getPath().c_str());
             // printf("Paquetes a extraer: %lf\n", paquetesAExtraer);
-            // printf("time_total: %li\n", time_total);
             // printf("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn(), (float)buffer->getBufferTotalTimeIn());
             // printf("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut(), (float)buffer->getBufferTotalTimeOut());
             // printf("Scale: %li\n", buffer->getTimeScale());
             // printf("buffer_in: %f (%f)\n", (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale())*1000000 );
             // printf("buffer_out: %f (%f)\n", (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), ((float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale())*1000000);
-            // printf("time: %f\n", (float)time_total/1000000 );
             // printf("segundos por presentar: %i, paquetes a extraer: %i\n",segundosPorPresentar, paquetesAExtraer );
             // printf("\033[1;31mFREEZE!!!\033[0m\n");
             printf("\033[0;36mDuracion congelacion: %i\033[0m\n", duracionCongelacion);
