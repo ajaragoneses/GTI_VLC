@@ -86,6 +86,8 @@ namespace adaptative
         void prune();
 
     private:
+        void movePackages(mtime_t time, SegmentChunk *chunk);
+        bool checkFreeze(mtime_t time, SegmentChunk *chunk);
         SegmentChunk *getChunk();
         size_t read(HTTPConnectionManager *);
         demux_t *p_demux;
@@ -97,6 +99,7 @@ namespace adaptative
         SegmentChunk *currentChunk;
         bool disabled;
         bool eof;
+        bool primer_segmento;
         std::string language;
         std::string description;
 
@@ -225,6 +228,7 @@ namespace adaptative
             int bufferInSize();
             void setAdaptationLogic(AbstractAdaptationLogic* logic);
             int getMaxBufferSize();
+            void moveInToOut(int64_t numero_segmentos);
 
         private:
             vlc_mutex_t  lock;
