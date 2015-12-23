@@ -1,0 +1,997 @@
+access/liblive555_plugin_la-live555.lo: \
+ ../../extras/package/win32/../../../modules/access/live555.cpp \
+ ../config.h ../../extras/package/win32/../../../include/vlc_fixups.h \
+ /usr/share/mingw-w64/include/time.h \
+ /usr/share/mingw-w64/include/crtdefs.h \
+ /usr/share/mingw-w64/include/_mingw.h \
+ /usr/share/mingw-w64/include/_mingw_mac.h \
+ /usr/share/mingw-w64/include/_mingw_secapi.h \
+ /usr/share/mingw-w64/include/vadefs.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_directx.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
+ /usr/share/mingw-w64/include/_timeval.h \
+ /usr/share/mingw-w64/include/sec_api/time_s.h \
+ /usr/share/mingw-w64/include/sys/timeb.h \
+ /usr/share/mingw-w64/include/sec_api/sys/timeb_s.h \
+ /usr/share/mingw-w64/include/pthread_time.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include/stddef.h \
+ /usr/share/mingw-w64/include/stddef.h \
+ /usr/share/mingw-w64/include/stdio.h \
+ /usr/share/mingw-w64/include/_mingw_print_push.h \
+ /usr/share/mingw-w64/include/_mingw_off_t.h \
+ /usr/i686-w64-mingw32/include/swprintf.inl \
+ /usr/share/mingw-w64/include/sec_api/stdio_s.h \
+ /usr/share/mingw-w64/include/_mingw_print_pop.h \
+ /usr/share/mingw-w64/include/sys/types.h \
+ /usr/share/mingw-w64/include/dirent.h /usr/share/mingw-w64/include/io.h \
+ /usr/share/mingw-w64/include/string.h \
+ /usr/share/mingw-w64/include/sec_api/string_s.h \
+ /usr/share/mingw-w64/include/sec_api/io_s.h \
+ /usr/share/mingw-w64/include/errno.h \
+ /usr/share/mingw-w64/include/inttypes.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include/stdint.h \
+ /usr/share/mingw-w64/include/stdint.h \
+ ../../extras/package/win32/../../../include/vlc_common.h \
+ ../../extras/package/win32/../../../include/vlc_config.h \
+ /usr/share/mingw-w64/include/stdlib.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include-fixed/limits.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include-fixed/syslimits.h \
+ /usr/share/mingw-w64/include/limits.h \
+ /usr/share/mingw-w64/include/sec_api/stdlib_s.h \
+ /usr/share/mingw-w64/include/malloc.h \
+ /usr/lib/gcc/i686-w64-mingw32/4.8/include/stdarg.h \
+ /usr/share/mingw-w64/include/stdarg.h \
+ /usr/share/mingw-w64/include/_mingw_stdarg.h \
+ /usr/share/mingw-w64/include/windows.h \
+ /usr/share/mingw-w64/include/sdkddkver.h \
+ /usr/share/mingw-w64/include/excpt.h \
+ /usr/share/mingw-w64/include/windef.h \
+ /usr/share/mingw-w64/include/minwindef.h \
+ /usr/share/mingw-w64/include/winapifamily.h \
+ /usr/share/mingw-w64/include/specstrings.h \
+ /usr/share/mingw-w64/include/sal.h /usr/share/mingw-w64/include/winnt.h \
+ /usr/share/mingw-w64/include/_mingw_unicode.h \
+ /usr/share/mingw-w64/include/ctype.h \
+ /usr/share/mingw-w64/include/apiset.h \
+ /usr/share/mingw-w64/include/psdk_inc/intrin-impl.h \
+ /usr/share/mingw-w64/include/basetsd.h \
+ /usr/share/mingw-w64/include/guiddef.h \
+ /usr/share/mingw-w64/include/pshpack4.h \
+ /usr/share/mingw-w64/include/poppack.h \
+ /usr/share/mingw-w64/include/pshpack4.h \
+ /usr/share/mingw-w64/include/pshpack2.h \
+ /usr/share/mingw-w64/include/poppack.h \
+ /usr/share/mingw-w64/include/pshpack2.h \
+ /usr/share/mingw-w64/include/pshpack8.h \
+ /usr/share/mingw-w64/include/pshpack8.h \
+ /usr/share/mingw-w64/include/ktmtypes.h \
+ /usr/share/mingw-w64/include/winbase.h \
+ /usr/share/mingw-w64/include/apisetcconv.h \
+ /usr/share/mingw-w64/include/minwinbase.h \
+ /usr/share/mingw-w64/include/bemapiset.h \
+ /usr/share/mingw-w64/include/debugapi.h \
+ /usr/share/mingw-w64/include/errhandlingapi.h \
+ /usr/share/mingw-w64/include/fibersapi.h \
+ /usr/share/mingw-w64/include/fileapi.h \
+ /usr/share/mingw-w64/include/handleapi.h \
+ /usr/share/mingw-w64/include/heapapi.h \
+ /usr/share/mingw-w64/include/ioapiset.h \
+ /usr/share/mingw-w64/include/interlockedapi.h \
+ /usr/share/mingw-w64/include/jobapi.h \
+ /usr/share/mingw-w64/include/libloaderapi.h \
+ /usr/share/mingw-w64/include/memoryapi.h \
+ /usr/share/mingw-w64/include/namedpipeapi.h \
+ /usr/share/mingw-w64/include/namespaceapi.h \
+ /usr/share/mingw-w64/include/processenv.h \
+ /usr/share/mingw-w64/include/processthreadsapi.h \
+ /usr/share/mingw-w64/include/processtopologyapi.h \
+ /usr/share/mingw-w64/include/profileapi.h \
+ /usr/share/mingw-w64/include/realtimeapiset.h \
+ /usr/share/mingw-w64/include/securityappcontainer.h \
+ /usr/share/mingw-w64/include/securitybaseapi.h \
+ /usr/share/mingw-w64/include/synchapi.h \
+ /usr/share/mingw-w64/include/sysinfoapi.h \
+ /usr/share/mingw-w64/include/systemtopologyapi.h \
+ /usr/share/mingw-w64/include/threadpoolapiset.h \
+ /usr/share/mingw-w64/include/threadpoollegacyapiset.h \
+ /usr/share/mingw-w64/include/utilapiset.h \
+ /usr/share/mingw-w64/include/wow64apiset.h \
+ /usr/share/mingw-w64/include/winerror.h \
+ /usr/share/mingw-w64/include/fltwinerror.h \
+ /usr/share/mingw-w64/include/timezoneapi.h \
+ /usr/share/mingw-w64/include/wingdi.h \
+ /usr/share/mingw-w64/include/pshpack1.h \
+ /usr/share/mingw-w64/include/winuser.h \
+ /usr/share/mingw-w64/include/tvout.h \
+ /usr/share/mingw-w64/include/winnls.h \
+ /usr/share/mingw-w64/include/datetimeapi.h \
+ /usr/share/mingw-w64/include/stringapiset.h \
+ /usr/share/mingw-w64/include/wincon.h \
+ /usr/share/mingw-w64/include/winver.h \
+ /usr/share/mingw-w64/include/winreg.h \
+ /usr/share/mingw-w64/include/reason.h \
+ /usr/share/mingw-w64/include/winnetwk.h \
+ /usr/share/mingw-w64/include/wnnc.h \
+ /usr/share/mingw-w64/include/virtdisk.h \
+ /usr/share/mingw-w64/include/stralign.h \
+ /usr/share/mingw-w64/include/sec_api/stralign_s.h \
+ /usr/share/mingw-w64/include/winsvc.h /usr/share/mingw-w64/include/mcx.h \
+ /usr/share/mingw-w64/include/imm.h \
+ ../../extras/package/win32/../../../include/vlc_mtime.h \
+ ../../extras/package/win32/../../../include/vlc_threads.h \
+ /usr/share/mingw-w64/include/process.h \
+ ../../extras/package/win32/../../../include/vlc_arrays.h \
+ /usr/share/mingw-w64/include/tchar.h \
+ /usr/share/mingw-w64/include/wchar.h \
+ /usr/share/mingw-w64/include/_mingw_stat64.h \
+ /usr/share/mingw-w64/include/sec_api/wchar_s.h \
+ /usr/share/mingw-w64/include/sec_api/tchar_s.h \
+ ../../extras/package/win32/../../../include/vlc_messages.h \
+ ../../extras/package/win32/../../../include/vlc_objects.h \
+ ../../extras/package/win32/../../../include/vlc_variables.h \
+ ../../extras/package/win32/../../../include/vlc_main.h \
+ ../../extras/package/win32/../../../include/vlc_configuration.h \
+ ../../extras/package/win32/../../../include/vlc_plugin.h \
+ ../../extras/package/win32/../../../include/vlc_input.h \
+ ../../extras/package/win32/../../../include/vlc_es.h \
+ ../../extras/package/win32/../../../include/vlc_fourcc.h \
+ ../../extras/package/win32/../../../include/vlc_text_style.h \
+ ../../extras/package/win32/../../../include/vlc_meta.h \
+ ../../extras/package/win32/../../../include/vlc_epg.h \
+ ../../extras/package/win32/../../../include/vlc_events.h \
+ ../../extras/package/win32/../../../include/vlc_input_item.h \
+ ../../extras/package/win32/../../../include/vlc_vout_osd.h \
+ ../../extras/package/win32/../../../include/vlc_demux.h \
+ ../../extras/package/win32/../../../include/vlc_stream.h \
+ ../../extras/package/win32/../../../include/vlc_block.h \
+ ../../extras/package/win32/../../../include/vlc_es_out.h \
+ ../../extras/package/win32/../../../include/vlc_dialog.h \
+ ../../extras/package/win32/../../../include/vlc_url.h \
+ ../../extras/package/win32/../../../include/vlc_strings.h \
+ ../../extras/package/win32/../../../include/vlc_interrupt.h \
+ ../../extras/package/win32/../../../include/vlc_threads.h \
+ /usr/share/mingw-w64/include/ws2tcpip.h \
+ /usr/share/mingw-w64/include/winsock2.h \
+ /usr/share/mingw-w64/include/psdk_inc/_ws1_undef.h \
+ /usr/share/mingw-w64/include/_bsd_types.h \
+ /usr/share/mingw-w64/include/inaddr.h \
+ /usr/share/mingw-w64/include/psdk_inc/_socket_types.h \
+ /usr/share/mingw-w64/include/psdk_inc/_fd_types.h \
+ /usr/share/mingw-w64/include/psdk_inc/_ip_types.h \
+ /usr/share/mingw-w64/include/psdk_inc/_wsadata.h \
+ /usr/share/mingw-w64/include/ws2def.h \
+ /usr/share/mingw-w64/include/psdk_inc/_wsa_errnos.h \
+ /usr/share/mingw-w64/include/qos.h \
+ /usr/share/mingw-w64/include/psdk_inc/_ip_mreq1.h \
+ /usr/share/mingw-w64/include/ws2ipdef.h \
+ /usr/share/mingw-w64/include/in6addr.h \
+ /usr/share/mingw-w64/include/mstcpip.h \
+ /usr/share/mingw-w64/include/assert.h \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/UsageEnvironment.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/UsageEnvironment_version.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetCommon.h \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Boolean.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/strDup.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment0.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment_version.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DelayQueue.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GroupsockHelper.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetAddress.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/HashTable.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MultiFramedRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Media.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia_version.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPInterface.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Groupsock.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/groupsock_version.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetInterface.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GroupEId.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADURTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4ESVideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUDPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GSMAudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedFilter.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MultiFramedRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEGVideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoStreamDiscreteFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoStreamDiscreteFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoStreamDiscreteFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SimpleRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/uLawAudioFilter.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2IndexFromTransportStream.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamTrickModeFilter.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamIndexFile.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamMultiFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamMemoryBufferSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUDPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SimpleRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4LATMAudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4LATMAudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4ESVideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4GenericRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADURTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QCELPAudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VorbisAudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TheoraVideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP8VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP9VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFromPESSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamMultiplexor.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2Demux.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2DemuxedElementaryStream.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFromESSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ADTSAudioFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H261VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3FileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADU.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADUinterleaving.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3Transcoder.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADUTranscoder.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VorbisAudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TheoraVideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP8VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP9VideoRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4GenericRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoStreamDiscreteFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoStreamDiscreteFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoStreamFramer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DeviceSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AudioInputDevice.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/WAVAudioFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/StreamReplicator.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPRegisterSender.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPClient.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTCP.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DigestAuthentication.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPServer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GenericMediaServer.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ServerMediaSession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPServerSupportingHTTPStreaming.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TCPStreamSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SIPClient.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QuickTimeFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QuickTimeGenericRTPSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AVIFileSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/PassiveServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OnDemandServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/WAVAudioFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileSource.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/T140TextRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TextRTPSink.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3AudioFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2FileServerDemux.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ADTSAudioFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioFileServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportUDPServerMediaSubsession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MatroskaFileServerDemux.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MatroskaFile.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFileServerDemux.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFile.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ProxyServerMediaSession.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia_version.hh \
+ /home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Base64.hh \
+ ../../extras/package/win32/../../../modules/access/../access/mms/asf.h \
+ ../../extras/package/win32/../../../include/vlc_codecs.h
+
+../config.h:
+
+../../extras/package/win32/../../../include/vlc_fixups.h:
+
+/usr/share/mingw-w64/include/time.h:
+
+/usr/share/mingw-w64/include/crtdefs.h:
+
+/usr/share/mingw-w64/include/_mingw.h:
+
+/usr/share/mingw-w64/include/_mingw_mac.h:
+
+/usr/share/mingw-w64/include/_mingw_secapi.h:
+
+/usr/share/mingw-w64/include/vadefs.h:
+
+/usr/share/mingw-w64/include/sdks/_mingw_directx.h:
+
+/usr/share/mingw-w64/include/sdks/_mingw_ddk.h:
+
+/usr/share/mingw-w64/include/_timeval.h:
+
+/usr/share/mingw-w64/include/sec_api/time_s.h:
+
+/usr/share/mingw-w64/include/sys/timeb.h:
+
+/usr/share/mingw-w64/include/sec_api/sys/timeb_s.h:
+
+/usr/share/mingw-w64/include/pthread_time.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include/stddef.h:
+
+/usr/share/mingw-w64/include/stddef.h:
+
+/usr/share/mingw-w64/include/stdio.h:
+
+/usr/share/mingw-w64/include/_mingw_print_push.h:
+
+/usr/share/mingw-w64/include/_mingw_off_t.h:
+
+/usr/i686-w64-mingw32/include/swprintf.inl:
+
+/usr/share/mingw-w64/include/sec_api/stdio_s.h:
+
+/usr/share/mingw-w64/include/_mingw_print_pop.h:
+
+/usr/share/mingw-w64/include/sys/types.h:
+
+/usr/share/mingw-w64/include/dirent.h:
+
+/usr/share/mingw-w64/include/io.h:
+
+/usr/share/mingw-w64/include/string.h:
+
+/usr/share/mingw-w64/include/sec_api/string_s.h:
+
+/usr/share/mingw-w64/include/sec_api/io_s.h:
+
+/usr/share/mingw-w64/include/errno.h:
+
+/usr/share/mingw-w64/include/inttypes.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include/stdint.h:
+
+/usr/share/mingw-w64/include/stdint.h:
+
+../../extras/package/win32/../../../include/vlc_common.h:
+
+../../extras/package/win32/../../../include/vlc_config.h:
+
+/usr/share/mingw-w64/include/stdlib.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include-fixed/limits.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include-fixed/syslimits.h:
+
+/usr/share/mingw-w64/include/limits.h:
+
+/usr/share/mingw-w64/include/sec_api/stdlib_s.h:
+
+/usr/share/mingw-w64/include/malloc.h:
+
+/usr/lib/gcc/i686-w64-mingw32/4.8/include/stdarg.h:
+
+/usr/share/mingw-w64/include/stdarg.h:
+
+/usr/share/mingw-w64/include/_mingw_stdarg.h:
+
+/usr/share/mingw-w64/include/windows.h:
+
+/usr/share/mingw-w64/include/sdkddkver.h:
+
+/usr/share/mingw-w64/include/excpt.h:
+
+/usr/share/mingw-w64/include/windef.h:
+
+/usr/share/mingw-w64/include/minwindef.h:
+
+/usr/share/mingw-w64/include/winapifamily.h:
+
+/usr/share/mingw-w64/include/specstrings.h:
+
+/usr/share/mingw-w64/include/sal.h:
+
+/usr/share/mingw-w64/include/winnt.h:
+
+/usr/share/mingw-w64/include/_mingw_unicode.h:
+
+/usr/share/mingw-w64/include/ctype.h:
+
+/usr/share/mingw-w64/include/apiset.h:
+
+/usr/share/mingw-w64/include/psdk_inc/intrin-impl.h:
+
+/usr/share/mingw-w64/include/basetsd.h:
+
+/usr/share/mingw-w64/include/guiddef.h:
+
+/usr/share/mingw-w64/include/pshpack4.h:
+
+/usr/share/mingw-w64/include/poppack.h:
+
+/usr/share/mingw-w64/include/pshpack4.h:
+
+/usr/share/mingw-w64/include/pshpack2.h:
+
+/usr/share/mingw-w64/include/poppack.h:
+
+/usr/share/mingw-w64/include/pshpack2.h:
+
+/usr/share/mingw-w64/include/pshpack8.h:
+
+/usr/share/mingw-w64/include/pshpack8.h:
+
+/usr/share/mingw-w64/include/ktmtypes.h:
+
+/usr/share/mingw-w64/include/winbase.h:
+
+/usr/share/mingw-w64/include/apisetcconv.h:
+
+/usr/share/mingw-w64/include/minwinbase.h:
+
+/usr/share/mingw-w64/include/bemapiset.h:
+
+/usr/share/mingw-w64/include/debugapi.h:
+
+/usr/share/mingw-w64/include/errhandlingapi.h:
+
+/usr/share/mingw-w64/include/fibersapi.h:
+
+/usr/share/mingw-w64/include/fileapi.h:
+
+/usr/share/mingw-w64/include/handleapi.h:
+
+/usr/share/mingw-w64/include/heapapi.h:
+
+/usr/share/mingw-w64/include/ioapiset.h:
+
+/usr/share/mingw-w64/include/interlockedapi.h:
+
+/usr/share/mingw-w64/include/jobapi.h:
+
+/usr/share/mingw-w64/include/libloaderapi.h:
+
+/usr/share/mingw-w64/include/memoryapi.h:
+
+/usr/share/mingw-w64/include/namedpipeapi.h:
+
+/usr/share/mingw-w64/include/namespaceapi.h:
+
+/usr/share/mingw-w64/include/processenv.h:
+
+/usr/share/mingw-w64/include/processthreadsapi.h:
+
+/usr/share/mingw-w64/include/processtopologyapi.h:
+
+/usr/share/mingw-w64/include/profileapi.h:
+
+/usr/share/mingw-w64/include/realtimeapiset.h:
+
+/usr/share/mingw-w64/include/securityappcontainer.h:
+
+/usr/share/mingw-w64/include/securitybaseapi.h:
+
+/usr/share/mingw-w64/include/synchapi.h:
+
+/usr/share/mingw-w64/include/sysinfoapi.h:
+
+/usr/share/mingw-w64/include/systemtopologyapi.h:
+
+/usr/share/mingw-w64/include/threadpoolapiset.h:
+
+/usr/share/mingw-w64/include/threadpoollegacyapiset.h:
+
+/usr/share/mingw-w64/include/utilapiset.h:
+
+/usr/share/mingw-w64/include/wow64apiset.h:
+
+/usr/share/mingw-w64/include/winerror.h:
+
+/usr/share/mingw-w64/include/fltwinerror.h:
+
+/usr/share/mingw-w64/include/timezoneapi.h:
+
+/usr/share/mingw-w64/include/wingdi.h:
+
+/usr/share/mingw-w64/include/pshpack1.h:
+
+/usr/share/mingw-w64/include/winuser.h:
+
+/usr/share/mingw-w64/include/tvout.h:
+
+/usr/share/mingw-w64/include/winnls.h:
+
+/usr/share/mingw-w64/include/datetimeapi.h:
+
+/usr/share/mingw-w64/include/stringapiset.h:
+
+/usr/share/mingw-w64/include/wincon.h:
+
+/usr/share/mingw-w64/include/winver.h:
+
+/usr/share/mingw-w64/include/winreg.h:
+
+/usr/share/mingw-w64/include/reason.h:
+
+/usr/share/mingw-w64/include/winnetwk.h:
+
+/usr/share/mingw-w64/include/wnnc.h:
+
+/usr/share/mingw-w64/include/virtdisk.h:
+
+/usr/share/mingw-w64/include/stralign.h:
+
+/usr/share/mingw-w64/include/sec_api/stralign_s.h:
+
+/usr/share/mingw-w64/include/winsvc.h:
+
+/usr/share/mingw-w64/include/mcx.h:
+
+/usr/share/mingw-w64/include/imm.h:
+
+../../extras/package/win32/../../../include/vlc_mtime.h:
+
+../../extras/package/win32/../../../include/vlc_threads.h:
+
+/usr/share/mingw-w64/include/process.h:
+
+../../extras/package/win32/../../../include/vlc_arrays.h:
+
+/usr/share/mingw-w64/include/tchar.h:
+
+/usr/share/mingw-w64/include/wchar.h:
+
+/usr/share/mingw-w64/include/_mingw_stat64.h:
+
+/usr/share/mingw-w64/include/sec_api/wchar_s.h:
+
+/usr/share/mingw-w64/include/sec_api/tchar_s.h:
+
+../../extras/package/win32/../../../include/vlc_messages.h:
+
+../../extras/package/win32/../../../include/vlc_objects.h:
+
+../../extras/package/win32/../../../include/vlc_variables.h:
+
+../../extras/package/win32/../../../include/vlc_main.h:
+
+../../extras/package/win32/../../../include/vlc_configuration.h:
+
+../../extras/package/win32/../../../include/vlc_plugin.h:
+
+../../extras/package/win32/../../../include/vlc_input.h:
+
+../../extras/package/win32/../../../include/vlc_es.h:
+
+../../extras/package/win32/../../../include/vlc_fourcc.h:
+
+../../extras/package/win32/../../../include/vlc_text_style.h:
+
+../../extras/package/win32/../../../include/vlc_meta.h:
+
+../../extras/package/win32/../../../include/vlc_epg.h:
+
+../../extras/package/win32/../../../include/vlc_events.h:
+
+../../extras/package/win32/../../../include/vlc_input_item.h:
+
+../../extras/package/win32/../../../include/vlc_vout_osd.h:
+
+../../extras/package/win32/../../../include/vlc_demux.h:
+
+../../extras/package/win32/../../../include/vlc_stream.h:
+
+../../extras/package/win32/../../../include/vlc_block.h:
+
+../../extras/package/win32/../../../include/vlc_es_out.h:
+
+../../extras/package/win32/../../../include/vlc_dialog.h:
+
+../../extras/package/win32/../../../include/vlc_url.h:
+
+../../extras/package/win32/../../../include/vlc_strings.h:
+
+../../extras/package/win32/../../../include/vlc_interrupt.h:
+
+../../extras/package/win32/../../../include/vlc_threads.h:
+
+/usr/share/mingw-w64/include/ws2tcpip.h:
+
+/usr/share/mingw-w64/include/winsock2.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_ws1_undef.h:
+
+/usr/share/mingw-w64/include/_bsd_types.h:
+
+/usr/share/mingw-w64/include/inaddr.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_socket_types.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_fd_types.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_ip_types.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_wsadata.h:
+
+/usr/share/mingw-w64/include/ws2def.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_wsa_errnos.h:
+
+/usr/share/mingw-w64/include/qos.h:
+
+/usr/share/mingw-w64/include/psdk_inc/_ip_mreq1.h:
+
+/usr/share/mingw-w64/include/ws2ipdef.h:
+
+/usr/share/mingw-w64/include/in6addr.h:
+
+/usr/share/mingw-w64/include/mstcpip.h:
+
+/usr/share/mingw-w64/include/assert.h:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/UsageEnvironment.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/UsageEnvironment_version.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetCommon.h:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Boolean.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/strDup.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment0.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUsageEnvironment_version.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DelayQueue.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GroupsockHelper.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetAddress.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/HashTable.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MultiFramedRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Media.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia_version.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPInterface.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Groupsock.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/groupsock_version.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/NetInterface.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GroupEId.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADURTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4ESVideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUDPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GSMAudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedFilter.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MultiFramedRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEGVideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoStreamDiscreteFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264or5VideoStreamDiscreteFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoStreamDiscreteFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SimpleRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/uLawAudioFilter.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2IndexFromTransportStream.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamTrickModeFilter.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamIndexFile.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamMultiFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FramedFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ByteStreamMemoryBufferSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/BasicUDPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SimpleRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4LATMAudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4LATMAudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4ESVideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4GenericRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADURTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QCELPAudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/JPEGVideoSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VorbisAudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TheoraVideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP8VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP9VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFromPESSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamMultiplexor.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2Demux.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2DemuxedElementaryStream.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFromESSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ADTSAudioFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H261VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3FileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADU.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADUinterleaving.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3Transcoder.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3ADUTranscoder.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2AudioStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VorbisAudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TheoraVideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP8VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/VP9VideoRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4GenericRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoStreamDiscreteFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoStreamDiscreteFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoStreamFramer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DeviceSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AudioInputDevice.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/WAVAudioFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/StreamReplicator.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPRegisterSender.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPClient.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MediaSession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTCP.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DigestAuthentication.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPServer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/GenericMediaServer.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ServerMediaSession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/RTSPServerSupportingHTTPStreaming.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TCPStreamSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/SIPClient.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QuickTimeFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/QuickTimeGenericRTPSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AVIFileSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/PassiveServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG4VideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/FileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OnDemandServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H264VideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H265VideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/WAVAudioFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioFileSource.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AMRAudioRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/T140TextRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/TextRTPSink.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MP3AudioFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2VideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG1or2FileServerDemux.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/H263plusVideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ADTSAudioFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/DVVideoFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/AC3AudioFileServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MPEG2TransportUDPServerMediaSubsession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MatroskaFileServerDemux.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/MatroskaFile.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFileServerDemux.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/OggFile.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/ProxyServerMediaSession.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/liveMedia_version.hh:
+
+/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/include/Base64.hh:
+
+../../extras/package/win32/../../../modules/access/../access/mms/asf.h:
+
+../../extras/package/win32/../../../include/vlc_codecs.h:

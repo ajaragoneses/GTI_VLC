@@ -1,0 +1,8 @@
+#! /bin/bash
+rm -f .error$$
+ERROR=0
+export PATH="/home/gti/Escritorio/vlc_2/vlc/contrib/i686-w64-mingw32/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/gti/MAMBA-ENV/bin:/home/gti/MAMBA-ENV/bin:/home/gti/Workspace/android-sdks/platform-tools:/home/gti/Workspace/android-sdks/tools:/home/gti/Workspace/android/OpenCV-2.4.10-android-sdk/sdk/native/jni/include/:/home/gti/Workspace/android-ndk-r9:/home/gti/Workspace/android-sdks/tools:/home/gti/Workspace/android-sdks/platform-tools:/usr/local/include" LANG=C
+(make V=1 $@ 2>&1 || touch .error$$)| ../extras/package/win32/../../../extras/buildsystem/make.pl
+test -f .error$$ && ERROR=1
+rm -f .error$$
+exit $ERROR
