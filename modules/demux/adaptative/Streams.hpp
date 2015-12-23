@@ -229,6 +229,7 @@ namespace adaptative
             void setAdaptationLogic(AbstractAdaptationLogic* logic);
             int getMaxBufferSize();
             void moveInToOut(int64_t numero_segmentos);
+            void setMaxBufferSize(int maxSize);
 
         private:
             vlc_mutex_t  lock;
@@ -238,12 +239,12 @@ namespace adaptative
             bool thread_inicio = false;
             list<data_download *> buffer_interno_in;
             list<data_download *> buffer_interno_out;
-            bool inToOut();
             int64_t bufferTotalTimeIn;
             int64_t bufferTotalTimeOut;
             int64_t timescale;
             int64_t durationSegment;
             AbstractAdaptationLogic* adaptationLogic;
+            int sizeBuff;
 
     };
 

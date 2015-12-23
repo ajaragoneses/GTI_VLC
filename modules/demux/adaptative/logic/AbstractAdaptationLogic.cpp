@@ -55,3 +55,6 @@ void AbstractAdaptationLogic::setBuffer(buffer_threadSave* buffer){
 void AbstractAdaptationLogic::inicializar(){
 	// printf("%s\n","abstractAdaptationLogic::inicializar" );
 }
+int AbstractAdaptationLogic::getMaxBufferSize(){
+	return 0;
+}

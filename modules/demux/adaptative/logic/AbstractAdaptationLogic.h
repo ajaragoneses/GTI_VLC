@@ -52,6 +52,7 @@ namespace adaptative
                 void setBuffer(buffer_threadSave* buffer);
                 virtual void setCalculateDownloadRate();
                 virtual void inicializar();
+                virtual int getMaxBufferSize();
 
                 enum LogicType
                 {

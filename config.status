@@ -2117,7 +2117,7 @@ D["PACKAGE_VERSION_EXTRA"]=" 0"
 D["PACKAGE_VERSION_DEV"]=" \"git\""
 D["VLC_COMPILE_BY"]=" \"gti\""
 D["VLC_COMPILE_HOST"]=" \"gti-HP-Z820-Workstation\""
-D["VLC_COMPILER"]=" \"gcc version 4.9.2 (Ubuntu 4.9.2-0ubuntu1~14.04)\""
+D["VLC_COMPILER"]=" \"gcc version 4.9.3 (Ubuntu 4.9.3-8ubuntu2~14.04)\""
   for (key in D) D_is_set[key] = 1
   FS = ""
 }

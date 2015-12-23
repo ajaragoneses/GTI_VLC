@@ -67,7 +67,7 @@ using namespace std;
     #define PRINT_BUFFER(buff_name, buff)
 #endif    
 
-#define MAX_BUFFER 100
+#define MAX_BUFFER 5
 
 // #define NO_BUFFER
 
@@ -82,8 +82,6 @@ bool thread_end = false;
 HTTPConnectionManager *connManagerGlobal = NULL;
 
 buffer_threadSave *buffer;
-
-int contador_lectura = 0;
 
 void *Stream::EventThread(void *data){
     static_cast<Stream*>(data)->thread_buffer();
@@ -172,6 +170,7 @@ void Stream::create(AbstractAdaptationLogic *logic, SegmentTracker *tracker,
     #ifndef NO_BUFFER
         buffer->setAdaptationLogic(logic);
         adaptationLogic->setBuffer(buffer);
+        buffer->setMaxBufferSize(adaptationLogic->getMaxBufferSize());
         adaptationLogic->inicializar();
     #endif
 }
@@ -243,7 +242,6 @@ SegmentChunk * Stream::getChunk()
         currentChunk = segmentTracker->getNextChunk(output->switchAllowed());
         if (currentChunk == NULL){
             eof = true;
-            // thread_end = true;
             DEBUG("%s\n","eof!");
             buffer->moveInToOut(buffer->bufferInSize());
         }
@@ -325,7 +323,6 @@ size_t Stream::read(HTTPConnectionManager *connManager){
             vlc_mutex_unlock( &lock_conMannager );
         }
         if(eof && buffer->bufferInSize() == 0 && buffer->size() == 0){
-            // printf("Return 0!!\n");
             readsize = 0;
         } else {
             buffer_threadSave::data_download* dataInfo = buffer->pop();
@@ -411,27 +408,9 @@ size_t Stream::read_real(HTTPConnectionManager *connManager)
     ssize_t ret = chunk->getConnection()->read(block->p_buffer, readsize);
     time = mdate() - time;
 
-    // printf("contador lectura: %i\n", ++contador_lectura );
-    // printf("ret: %i\n",ret );
-
     #ifndef NO_BUFFER
         int paquetesAExtraer = 0;
         int64_t segundosPorPresentar = 0;
-
-        // DEBUG("primer segmento: %i\n",primer_segmento );
-        // if(!primer_segmento){
-        //     DEBUG("NEW SEGMENT: %i\n", ++contador_lectura);
-        //     segundosPorPresentar = time - buffer->getBufferTotalTimeOut();
-        //     if(segundosPorPresentar > 0 && chunk->getSegmentDuration() != 0){        
-        //         DEBUG("\033[0;36msegundos por presentar: %lli\033[0m\n", segundosPorPresentar);
-        //         DEBUG("\033[0;36mduracion del segmento: %lli\033[0m\n", chunk->getSegmentDuration());
-        //         paquetesAExtraer = segundosPorPresentar/chunk->getSegmentDuration();
-        //         DEBUG("\033[0;36mPaquetes a extraer: %lli\033[0m\n", paquetesAExtraer);
-        //     }
-        //     DEBUG("total time buffer (IN): %li (%f)\n", buffer->getBufferTotalTimeIn()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeIn()/buffer->getTimeScale());
-        //     DEBUG("total time buffer (OUT): %li (%f)\n", buffer->getBufferTotalTimeOut()/buffer->getTimeScale(), (float)buffer->getBufferTotalTimeOut()/buffer->getTimeScale());
-
-        // } // primer_segmento
         DEBUG("PATH: %s\n", chunk->getPath().c_str());  
         if(!primer_segmento && checkFreeze(time, chunk)){
             DEBUG("\033[1;31mCONGELACION\033[0m\n");
@@ -482,8 +461,8 @@ size_t Stream::read_real(HTTPConnectionManager *connManager)
 
         /*Comprobamos la disponibilidad de segmentos en el buffer de presentacion*/
         movePackages(time, chunk);
-        printf("total time buffer (IN): %lli (%lli)\n", buffer->getBufferTotalTimeIn(), buffer->bufferInSize() );
-        printf("total time buffer (OUT): %lli (%lli)\n", buffer->getBufferTotalTimeOut(), buffer->size() );
+        DEBUG("total time buffer (IN): %lli (%lli)\n", buffer->getBufferTotalTimeIn(), buffer->bufferInSize() );
+        DEBUG("total time buffer (OUT): %lli (%lli)\n", buffer->getBufferTotalTimeOut(), buffer->size() );
     #else
         if(output)
             output->pushBlock(block, b_segment_head_chunk);
@@ -580,7 +559,7 @@ buffer_threadSave::buffer_threadSave(){
     bufferTotalTimeIn = 0;
     bufferTotalTimeOut = 0;
     timescale = 0;
-    // adaptationLogic = NULL;
+    sizeBuff = MAX_BUFFER;
 }
 
 void buffer_threadSave::setAdaptationLogic(AbstractAdaptationLogic* logic){
@@ -590,7 +569,7 @@ void buffer_threadSave::setAdaptationLogic(AbstractAdaptationLogic* logic){
 void buffer_threadSave::push(data_download* data){
     DEBUG("lock!\n");
     vlc_mutex_lock( &lock );
-    while (buffer_interno_out.size() == MAX_BUFFER){ /* si buffer lleno */
+    while (buffer_interno_out.size() == sizeBuff){ /* si buffer lleno */
         DEBUG("%s%i\n", "bloqueo por buffer lleno: ",buffer_interno_in.size() );
         vlc_cond_wait(&no_lleno, &lock); /* se bloquea */
         DEBUG("%s\n","Desbloqueo del buffer lleno");
@@ -601,20 +580,6 @@ void buffer_threadSave::push(data_download* data){
     PRINT_BUFFER("OUT", buffer_interno_out);
     
     bufferTotalTimeIn += data->duration;
-    
-    // if(inToOut()){
-    //     DEBUG("inToOut true!\n");
-    //     buffer_interno_out.push_back(buffer_interno_in.front());
-    //     DEBUG("%s\n","extraemos...");
-    //     bufferTotalTimeOut += data->duration;
-    //     bufferTotalTimeIn -= data->duration;
-    //     DEBUG("bufferTotalTimeIn: %li\n");
-    //     buffer_interno_in.pop_front();
-    //     DEBUG("%s\n","Desechamos...");
-    // } 
-    // else {
-    //     DEBUG("\033[1;33minToOut false!\033[0m\n");
-    // }
     
     DEBUG("PUSH: %li, TOTAL: %li\n", data->duration, bufferTotalTimeIn);
 
@@ -653,36 +618,15 @@ int buffer_threadSave::getSegmentDuration(){
     return buffer_interno_out.front()->duration;
 }
 
-bool buffer_threadSave::inToOut(){
-    /*
-        Check conditions to move data
-        from buffer_in to buffer_out
-    */
-    // printf("%i > %i?  %s\n",buffer_interno_in.size(),  (MAX_BUFFER/2), buffer_interno_in.size() > (MAX_BUFFER/2)? "true" : "false" );
-    // return buffer_interno_in.size() > (MAX_BUFFER/2);
-    // if(buffer_interno_out.size() < (MAX_BUFFER/2) || buffer_interno_in.size() > (MAX_BUFFER/2)){
-    //     return true;
-    // }
-
-    if(adaptationLogic == NULL){
-        return true;
-    }
-    return adaptationLogic->bufferTransferLogic();
-}
-
 buffer_threadSave::data_download* buffer_threadSave::pop(){
-    // printf("%s%i\n", "buffer IN: ",buffer_interno_in.size() );
-    // printf("%s%i\n", "buffer OUT: ",buffer_interno_out.size() );
     DEBUG("POP\n");
     DEBUG("%s\n","lock!");
     vlc_mutex_lock( &lock );
     while (buffer_interno_out.size() == 0){
-        // if(buffer_interno_in.size() == 0 ){
-            DEBUG("%s%i\n", "bloqueo por buffer vacio IN: ",buffer_interno_in.size() );
-            DEBUG("%s%i\n", "bloqueo por buffer vacio OUT: ",buffer_interno_out.size() );
-            vlc_cond_wait(&no_vacio, &lock); /* se bloquea */
-            DEBUG("%s\n","Desbloqueo del buffer vacio");
-        // }
+        DEBUG("%s%i\n", "bloqueo por buffer vacio IN: ",buffer_interno_in.size() );
+        DEBUG("%s%i\n", "bloqueo por buffer vacio OUT: ",buffer_interno_out.size() );
+        vlc_cond_wait(&no_vacio, &lock); /* se bloquea */
+        DEBUG("%s\n","Desbloqueo del buffer vacio");
     }
 
     DEBUG("%s\n","pop data...");
@@ -696,22 +640,25 @@ buffer_threadSave::data_download* buffer_threadSave::pop(){
     return ret;
 }
 
+void buffer_threadSave::setMaxBufferSize(int maxSize){
+    printf("Nuevo tamaño: %i\n", maxSize);
+    sizeBuff = maxSize;
+}
+
 void buffer_threadSave::moveInToOut(int64_t numero_segmentos){
-        DEBUG("moveInToOut : %i\n", numero_segmentos);
-        data_download* data;
-        // vlc_mutex_lock( &lock );
-        DEBUG("moviendo!!\n");
-        while(numero_segmentos-- >0 && buffer_interno_in.size() > 0){
-            data = buffer_interno_in.front();      
-            buffer_interno_out.push_back(data);
-            DEBUG("%s\n","extraemos...");
-            bufferTotalTimeOut += data->duration;
-            bufferTotalTimeIn -= data->duration;
-            DEBUG("bufferTotalTimeIn: %li\n");
-            buffer_interno_in.pop_front();
-            DEBUG("%s\n","Desechamos...");
-        }
-        // vlc_mutex_unlock( &lock );
+    DEBUG("moveInToOut : %i\n", numero_segmentos);
+    data_download* data;
+    DEBUG("moviendo!!\n");
+    while(numero_segmentos-- >0 && buffer_interno_in.size() > 0){
+        data = buffer_interno_in.front();      
+        buffer_interno_out.push_back(data);
+        DEBUG("%s\n","extraemos...");
+        bufferTotalTimeOut += data->duration;
+        bufferTotalTimeIn -= data->duration;
+        DEBUG("bufferTotalTimeIn: %li\n");
+        buffer_interno_in.pop_front();
+        DEBUG("%s\n","Desechamos...");
+    }
 }
 
 void buffer_threadSave::empty(){
@@ -756,7 +703,7 @@ int64_t buffer_threadSave::getFreezingTime(){
 }
 
 int buffer_threadSave::getMaxBufferSize(){
-    return MAX_BUFFER;
+    return sizeBuff;
 }
 
 /*******************************************/

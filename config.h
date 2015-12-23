@@ -721,7 +721,7 @@
 #define VERSION_MESSAGE "3.0.0-git Vetinari"
 
 /* compiler */
-#define VLC_COMPILER "gcc version 4.9.2 (Ubuntu 4.9.2-0ubuntu1~14.04)"
+#define VLC_COMPILER "gcc version 4.9.3 (Ubuntu 4.9.3-8ubuntu2~14.04)"
 
 /* user who ran configure */
 #define VLC_COMPILE_BY "gti"

@@ -98,9 +98,9 @@ DIST_COMMON = $(srcdir)/extras/package/macosx/package.mak \
 	$(top_srcdir)/extras/package/macosx/Info.plist.in \
 	$(top_srcdir)/extras/package/macosx/Resources/English.lproj/InfoPlist.strings.in \
 	$(dist_noinst_SCRIPTS) $(top_srcdir)/autotools/test-driver \
-	AUTHORS COPYING COPYING.LIB ChangeLog INSTALL NEWS README \
-	THANKS autotools/compile autotools/config.guess \
-	autotools/config.rpath autotools/config.sub \
+	AUTHORS COPYING COPYING.LIB ChangeLog INSTALL NEWS THANKS \
+	autotools/compile autotools/config.guess \
+	autotools/config.rpath autotools/config.sub autotools/depcomp \
 	autotools/install-sh autotools/missing autotools/ltmain.sh \
 	$(top_srcdir)/autotools/compile \
 	$(top_srcdir)/autotools/config.guess \

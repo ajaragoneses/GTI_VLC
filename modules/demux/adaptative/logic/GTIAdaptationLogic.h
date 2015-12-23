@@ -72,11 +72,12 @@ namespace adaptative
         class GTIAdaptationLogic : public AbstractAdaptationLogic
         {
             public:
-                GTIAdaptationLogic           (int w, int h);
+                GTIAdaptationLogic           (int w, int h, int buff);
                 void updateDownloadRate(size_t size, mtime_t time);
                 virtual BaseRepresentation *getCurrentRepresentation(BaseAdaptationSet *) const;
                 void inicializar();
                 void setCalculateDownloadRate();
+                int getMaxBufferSize();
             
             private:
                 GTIAlgorithm* algorithm;    

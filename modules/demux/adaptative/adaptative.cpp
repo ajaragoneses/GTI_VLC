@@ -67,6 +67,8 @@ static void Close   (vlc_object_t *);
 
 #define ADAPT_LOGIC_TEXT N_("Adaptation Logic")
 
+#define ADAPT_BUFFER_TEXT N_("Maximum size of buffer")
+
 static const int pi_logics[] = {AbstractAdaptationLogic::RateBased,
                                 AbstractAdaptationLogic::GTI_Stairs,
                                 AbstractAdaptationLogic::GTI_Logic,
@@ -93,6 +95,7 @@ vlc_module_begin ()
         add_integer( "adaptative-width",  480, ADAPT_WIDTH_TEXT,  ADAPT_WIDTH_TEXT,  true )
         add_integer( "adaptative-height", 360, ADAPT_HEIGHT_TEXT, ADAPT_HEIGHT_TEXT, true )
         add_integer( "adaptative-bw",     250, ADAPT_BW_TEXT,     ADAPT_BW_LONGTEXT,     false )
+        add_integer( "adaptative-buffer-size",     10, ADAPT_BUFFER_TEXT,     ADAPT_BUFFER_TEXT,     false )
         set_callbacks( Open, Close )
 vlc_module_end ()
 

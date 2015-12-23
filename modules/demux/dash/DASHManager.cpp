@@ -239,9 +239,10 @@ AbstractAdaptationLogic *DASHManager::createLogic(AbstractAdaptationLogic::Logic
         }
         case AbstractAdaptationLogic::GTI_Logic:
         {
+            int buffMaxSize = var_InheritInteger(p_demux, "adaptative-buffer-size");
             int width = var_InheritInteger(p_demux, "adaptative-width");
             int height = var_InheritInteger(p_demux, "adaptative-height");
-            return new (std::nothrow) GTIAdaptationLogic(width, height);
+            return new (std::nothrow) GTIAdaptationLogic(width, height, buffMaxSize);
         }
         default:
             return PlaylistManager::createLogic(type);
